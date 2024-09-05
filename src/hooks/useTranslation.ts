@@ -1,0 +1,52 @@
+import { useCallback } from 'react';
+import { Language } from 'context/base/types';
+import { useLanguage } from 'hooks';
+// import messages_mk from 'assets/messages_mk.json';
+import messages_en from 'assets/messages_en.json';
+
+const messages: Record<Language, Record<string, unknown>> = {
+  [Language.EN]: messages_en,
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getDataByPath = (data: any, path: string): string => {
+  if (!path || !data) {
+    return data;
+  }
+
+  return data[path];
+};
+
+const ROOT_PREFIX = 'templateapp';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type TranslationFunction = (key: string, params?: Record<string, any>) => string;
+
+const useTranslation = (prefix = '', fallbackValue?: string): TranslationFunction => {
+  const { language } = useLanguage();
+  const basePrefix = prefix.length == 0 ? ROOT_PREFIX : `${ROOT_PREFIX}.${prefix}`;
+
+  return useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (key, params) => {
+      const path = key.startsWith(basePrefix) ? key : `${basePrefix}.${key}`;
+      let message = getDataByPath(messages[language], path);
+
+      if (message && params) {
+        const matches = message.match(/{{[a-zA-Z]*}}/g) ?? [];
+        for (const match of matches) {
+          const property = match.substring(2, match.length - 2);
+
+          if (property in params) {
+            message = message.replaceAll(match, params[property]);
+          }
+        }
+      }
+
+      return message ?? fallbackValue ?? path;
+    },
+    [basePrefix, fallbackValue, language]
+  );
+};
+
+export default useTranslation;
