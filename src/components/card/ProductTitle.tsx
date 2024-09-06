@@ -21,10 +21,10 @@ type Props = Pick<ProductProps, 'title' | 'summary' | 'onView'>;
 const ProductTitle: React.FC<Props> = (props) => {
   return (
     <ProductCardTitleWrapper styleConfig={{ overflow: 'hidden', alignItems: 'center', padding: { top: 'sm' } }}>
-      <Button maxContent themeType="link" onClick={props.onView} size="lg">
+      <Button type="link" onClick={props.onView}>
         <div>{props.title}</div>
         {props.summary && (
-          <Text fontSize="sm" title={props.summary}>
+          <Text size="sm" title={props.summary}>
             {props.summary}
           </Text>
         )}

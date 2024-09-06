@@ -1,7 +1,7 @@
+import { UpOutlined } from '@ant-design/icons';
 import { FloatButton } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { BsArrowUp } from 'react-icons/bs';
 import { useLocation } from 'react-router-dom';
 import { scrollToTop } from 'utils';
 
@@ -25,5 +25,5 @@ export const BackToTopButton: React.FC = () => {
     return null;
   }
 
-  return createPortal(<FloatButton icon={<BsArrowUp />} onClick={scrollToTop} type="primary" />, portalsElement);
+  return createPortal(<FloatButton icon={<UpOutlined />} onClick={scrollToTop} type="primary" />, portalsElement);
 };

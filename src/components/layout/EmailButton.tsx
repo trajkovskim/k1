@@ -1,7 +1,7 @@
+import { MailOutlined } from '@ant-design/icons';
 import { Button } from 'components/common';
 import { useTranslation } from 'hooks';
 import React from 'react';
-import { MdEmail } from 'react-icons/md';
 import { mailTo } from 'utils';
 
 type Props = React.ComponentProps<typeof Button> & {
@@ -13,7 +13,7 @@ const EmailButton: React.FC<Props> = (props) => {
 
   const email = t('email');
   return (
-    <Button maxContent themeType="link" size="lg" icon={<MdEmail />} onClick={() => mailTo(email)} {...props}>
+    <Button maxContent themeType="link" size="lg" icon={<MailOutlined />} onClick={() => mailTo(email)} {...props}>
       {props.label && email}
     </Button>
   );

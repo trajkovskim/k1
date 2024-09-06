@@ -7,7 +7,7 @@ const Shop: React.FC = () => {
   return (
     <Container styleConfig={{ gap: '3rem', padding: { bottom: 'xl' } }}>
       <Container xs={PAGE_MAX_WIDTH} styleConfig={{ centered: true, padding: 'md' }}>
-        <Text fontSize="md">Shop header</Text>
+        <Text size="md">Shop header</Text>
       </Container>
       <Container
         xs={PAGE_MAX_WIDTH}

@@ -1,11 +1,29 @@
+import { Typography } from 'antd';
 import { NEW_LINE_DELIMITER } from 'components/common/typography/constants';
-import { StyledText, StyledTextProps } from 'components/common/typography/Text.styled';
+import { FontSize } from 'components/common/typography/types';
 import React from 'react';
+import styled from 'styled-components';
 
-type Props = React.ComponentProps<'span'> & React.PropsWithChildren & StyledTextProps;
-const Text = React.forwardRef<HTMLSpanElement | HTMLLabelElement, Props>(({ children, ...props }, ref) => {
+type StyledTextProps = {
+  nowrap?: boolean;
+  size?: FontSize;
+};
+
+const StyledText = styled(Typography.Text)<StyledTextProps>`
+  white-space: ${(props) => props.nowrap && 'nowrap'};
+  font-size: ${(props) => props.size && props.theme.fontSize[props.size]} !important;
+
+  ${(props) => {
+    console.log(props.theme.antd);
+    return '';
+  }}
+`;
+
+type Props = React.ComponentProps<typeof Typography.Text> & StyledTextProps;
+
+const Text = React.forwardRef<HTMLSpanElement, Props>(({ children, ...props }, ref) => {
   return (
-    <StyledText ref={ref} {...props} hasOnClick={!!props.onClick}>
+    <StyledText ref={ref} {...props}>
       {typeof children === 'string' && children.includes(NEW_LINE_DELIMITER)
         ? children.split(NEW_LINE_DELIMITER).map((line, index, allLines) => (
             <span key={index}>

@@ -1,69 +1,51 @@
+import { CheckOutlined, ExclamationCircleFilled } from '@ant-design/icons';
+import { Input as AntdInput, AutoComplete as AntdAutoComplete } from 'antd';
 import Spinner from 'components/common/Spinner';
-import { fontSize } from 'components/common/form/constants';
-import { Size } from 'components/common/form/types';
+import { ControlSize } from 'components/common/form/types';
 import { getCalcInputHeightCss } from 'components/common/form/utils';
-import { FontSize } from 'components/common/typography';
-import { BiErrorCircle } from 'react-icons/bi';
-import { GiCheckMark } from 'react-icons/gi';
 import styled, { css } from 'styled-components';
 
 export type StyledInputProps = {
-  size?: Size;
+  newSize?: ControlSize;
   noBorder?: boolean;
 };
 
 export type StyledInputWithRightContainerProps = StyledInputProps & { rightcontainerwidth?: number };
 
 export const inputCss = css<StyledInputWithRightContainerProps>`
-  box-sizing: border-box;
-  width: 100%;
-  font-size: inherit;
-  line-height: 20px;
-  outline: none;
-  border: ${(props) => (props.noBorder ? 'none' : '1px solid rgb(238, 238, 238)')};
-  border-radius: 4px;
-
   padding-right: ${(props) => `${props.rightcontainerwidth}px`};
-  transition: 100ms all;
 
   &::placeholder {
     font-size: inherit;
   }
-
-  &:focus {
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    /* border: 1px solid black; */
-  }
 `;
 
-export const StyledInput = styled.input<StyledInputWithRightContainerProps>`
+export const StyledAutocomplete = styled(AntdAutoComplete)<StyledInputWithRightContainerProps>`
   ${inputCss}
-  &:not([type='checkbox']) {
-    height: ${(props) => props.size && getCalcInputHeightCss(props.size, false)};
-    padding: 10px;
-  }
+  height: ${(props) => props.newSize && getCalcInputHeightCss(props.theme, props.newSize, false)};
 `;
 
-export const StyledTextarea = styled.textarea<StyledInputWithRightContainerProps>`
+export const StyledInput = styled(AntdInput)<StyledInputWithRightContainerProps>`
   ${inputCss}
-  padding: 10px;
-  padding-left: 8px;
+  height: ${(props) => props.newSize && getCalcInputHeightCss(props.theme, props.newSize, false)};
 `;
 
-type StyledFormFieldContainerProps = { label?: string; size?: FontSize };
+export const StyledTextarea = styled(AntdInput.TextArea)<StyledInputWithRightContainerProps>`
+  ${inputCss}
+`;
+
+type StyledFormFieldContainerProps = { label?: string; size?: ControlSize };
 
 export const StyledFormFieldContainer = styled.div<StyledFormFieldContainerProps>`
-  font-size: ${(props) => props.size && fontSize[props.size]};
-
-  position: relative;
+  font-size: ${(props) => props.size && props.theme.fontSize[props.size]};
 
   ${(props) =>
     props.label &&
     css`
       > input:not(input[type='checkbox']),
       > input:not(input[type='radio']) {
-        height: ${props.size && getCalcInputHeightCss(props.size, true)};
-        padding-top: ${props.size && `calc(${props.size && fontSize[props.size]} + 10px)`};
+        height: ${props.size && getCalcInputHeightCss(props.theme, props.size, true)};
+        padding-top: ${props.size && `calc(${props.size && props.theme.fontSize[props.size]} + 10px)`};
       }
 
       &::before {
@@ -71,7 +53,8 @@ export const StyledFormFieldContainer = styled.div<StyledFormFieldContainerProps
         pointer-events: none;
         top: 5px;
         left: 10px;
-        font-size: ${props.size && `calc(${fontSize[props.size]} - ${fontSize[props.size]} / 4.5)`};
+        font-size: ${props.size &&
+        `calc(${props.theme.fontSize[props.size]} - ${props.theme.fontSize[props.size]} / 4.5)`};
         position: absolute;
       }
     `}
@@ -98,14 +81,13 @@ export const iconCss = css`
   height: 100%;
 `;
 
-export const StyledGiCheckMark = styled(GiCheckMark)`
+export const StyledGiCheckMark = styled(CheckOutlined)`
   ${iconCss}
   color: green;
 `;
 
-export const StyledBiErrorCircle = styled(BiErrorCircle)`
+export const StyledBiErrorCircle = styled(ExclamationCircleFilled)`
   ${iconCss}
-  color: red;
 `;
 
 export const StyledSpinner = styled(Spinner)`

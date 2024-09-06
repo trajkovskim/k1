@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import theme, { Breakpoints } from 'theme';
+import theme, { Breakpoints, PaddingValues } from 'theme';
 import { createMedia } from 'utils';
 
 export type ContainerBreakpointsProps = {
@@ -30,8 +30,8 @@ type StyledContainerBaseProps = ContainerParentGapBreakpointsProps & {
 };
 
 type StyledContainerStyleProps = {
-  margin?: Breakpoints | Sides<Breakpoints>;
-  padding?: Breakpoints | Sides<Breakpoints>;
+  margin?: PaddingValues | Sides<PaddingValues>;
+  padding?: PaddingValues | Sides<PaddingValues>;
   direction?: React.CSSProperties['flexDirection'];
   alignItems?: React.CSSProperties['alignItems'];
   alignSelf?: React.CSSProperties['alignSelf'];
@@ -61,7 +61,10 @@ type ContainerBreakpointsStyleProps = {
 
 type StyledContainerProps = ContainerBreakpointsProps &
   ContainerBreakpointsStyleProps &
-  StyledContainerBaseProps & { styleConfig?: StyledContainerStyleProps };
+  StyledContainerBaseProps & {
+    styleConfig?: StyledContainerStyleProps;
+    transparent?: boolean;
+  };
 
 const MAX_COLUMNS = 12;
 
@@ -108,7 +111,7 @@ const createMediaQ = (props: StyledContainerProps, breakpoint: Breakpoints, csss
   );
 };
 
-export const createPaddingProperty = (padding?: Sides<Breakpoints> | Breakpoints) => css`
+export const createPaddingProperty = (padding?: Sides<PaddingValues> | PaddingValues) => css`
   padding: ${typeof padding === 'string' && theme.padding[padding]};
 
   ${typeof padding === 'object' &&
@@ -120,7 +123,7 @@ export const createPaddingProperty = (padding?: Sides<Breakpoints> | Breakpoints
   `}
 `;
 
-export const createMarginProperty = (margin?: Sides<Breakpoints> | Breakpoints) => css`
+export const createMarginProperty = (margin?: Sides<PaddingValues> | PaddingValues) => css`
   margin: ${typeof margin === 'string' && theme.padding[margin]};
 
   ${typeof margin === 'object' &&
@@ -205,6 +208,9 @@ const StyledContainer = styled.div<StyledContainerProps>`
   box-sizing: border-box;
   display: flex;
 
+  background: ${(props) => props.theme.antd.colorBgContainer};
+  background: ${(props) => props.transparent && 'transparent'};
+
   ${(props) => createStyleProps(props.styleConfig)}
 
   ${(props) => createMediaQ(props, 'xs')};
@@ -224,6 +230,8 @@ type Props = React.PropsWithRef<
 >;
 
 const Container = React.forwardRef<HTMLDivElement, Props>(({ children, ...props }, ref) => {
+  props.transparent = props.transparent ?? true;
+
   props.sm = props.sm ?? props.xs;
   props.md = props.md ?? props.sm;
   props.lg = props.lg ?? props.md;

@@ -1,6 +1,5 @@
 import { Card } from 'components/common';
 import styled from 'styled-components';
-import theme from 'theme';
 
 export const StyledCard = styled(Card)`
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
@@ -19,8 +18,13 @@ export const StyledCard = styled(Card)`
   }
 
   color: white;
+`;
 
-  .carousel_change-options > *::before {
+export const StyledShopProductCard = styled(StyledCard)`
+  color: black;
+`;
+
+/* .carousel_change-options > *::before {
     border-color: ${theme.productCard.carouselChangeOptionsBorder} !important;
   }
 
@@ -40,9 +44,4 @@ export const StyledCard = styled(Card)`
       background-color: ${theme.productCard.carouselChangeOptionsFillColorHover} !important;
       border-color: ${theme.productCard.carouselChangeOptionsFillBorderHover} !important;
     }
-  }
-`;
-
-export const StyledShopProductCard = styled(StyledCard)`
-  color: black;
-`;
+  } */

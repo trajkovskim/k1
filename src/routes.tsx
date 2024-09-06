@@ -1,6 +1,6 @@
 import TemplateApp from 'TemplateApp';
-import { Layout } from 'components/layout';
-import { Home, NotFound, Shop } from 'pages';
+import { AppLayout } from 'components/layout';
+import { Home, Result404, Shop } from 'pages';
 import React from 'react';
 import { Route } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ const routes: RouteOptions = {
     element: <TemplateApp />,
     children: {
       [Routes.ANY_WITH_LAYOUT]: {
-        element: <Layout />,
+        element: <AppLayout />,
         children: {
           [Routes.INDEX]: {
             element: <Home />,
@@ -33,7 +33,7 @@ const routes: RouteOptions = {
             element: <Shop />,
           },
           [Routes.ANY_OTHER]: {
-            element: <NotFound />,
+            element: <Result404 />,
           },
         },
       },

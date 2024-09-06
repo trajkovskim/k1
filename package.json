@@ -1,5 +1,5 @@
 {
-  "name": "strong-auto-ui-3",
+  "name": "template-app",
   "private": true,
   "proxy": "http://localhost:3000",
   "version": "0.0.0",
@@ -7,19 +7,16 @@
   "scripts": {
     "dev": "vite",
     "lint": "npx eslint --ext .jsx,.tsx,.js,.ts src/",
-    "generate-types": "yarn run generate-types-strongauto & yarn run generate-types-strongauto-reviews",
-    "generate-types-strongauto": "npx openapi-generator-cli generate -i docs/strongauto-api.v1.yaml -g typescript-fetch -o src/generated/strongauto",
-    "generate-types-strongauto-reviews": "npx openapi-generator-cli generate -i docs/strongauto-reviews-api.v1.yaml -g typescript-fetch -o src/generated/strongauto-reviews",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.4.0",
     "@emotion/css": "^11.11.2",
     "antd": "^5.20.4",
     "eslint": "^8.43.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.11.0",
     "react-router-dom": "^6.16.0",
     "styled-components": "^6.0.7"
   },

@@ -39,7 +39,7 @@ const HorizontalList: React.FC<Props> = ({ children, chunkSize, ...props }) => {
   const responsive = useMemo(
     () =>
       Object.entries(chunkSize ?? {}).map(([breakpoint, slidesNumber]) => ({
-        breakpoint: parseInt(bodyFontSize) * parseInt(theme.breakpoints.maxWidth[breakpoint as Breakpoints]),
+        breakpoint: bodyFontSize * parseInt(theme.breakpoints.maxWidth[breakpoint as Breakpoints]),
         settings: {
           slidesToShow: slidesNumber as number,
         },

@@ -1,9 +1,8 @@
+import { FilterFilled, FilterOutlined, MenuOutlined } from '@ant-design/icons';
 import { Breadcrumb, Button, Container, Line } from 'components/common';
 import { useTranslation } from 'hooks';
 import SortAndSizeDropdowns from 'pages/shop/SortAndSizeDropdowns';
 import React from 'react';
-import { BiMenu } from 'react-icons/bi';
-import { HiFilter, HiOutlineFilter } from 'react-icons/hi';
 import styled from 'styled-components';
 
 const Wrapper = styled(Container)`
@@ -40,7 +39,7 @@ const ListHeader: React.FC<Props> = (props) => {
           <Button
             maxContent
             onClick={props.onFiltersClick}
-            icon={props.filtersOpen ? <HiFilter /> : <HiOutlineFilter />}
+            icon={props.filtersOpen ? <FilterOutlined /> : <FilterFilled />}
             themeType="link"
             size="md"
           >
@@ -52,7 +51,7 @@ const ListHeader: React.FC<Props> = (props) => {
         </Container>
         <Container xs="max-content" lg={0} styleConfig={{ gap: '1rem', direction: 'row' }}>
           <Line type="vertical" />
-          <Button maxContent icon={<BiMenu />} size="xl" themeType="link" onClick={props.onPaginationClick} />
+          <Button maxContent icon={<MenuOutlined />} size="xl" themeType="link" onClick={props.onPaginationClick} />
         </Container>
       </Container>
     </Wrapper>

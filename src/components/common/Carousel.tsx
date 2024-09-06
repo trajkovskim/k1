@@ -40,11 +40,6 @@ const StyledCarousel = styled(CarouselAntd)<StyledCarouselProps>`
   & > .slick-dots button::after {
     background: unset;
   }
-
-  & > .slick-prev::after,
-  & > .slick-next::after {
-    color: #000;
-  }
 `;
 
 export type CarouselRef = CarouselRefAntd;

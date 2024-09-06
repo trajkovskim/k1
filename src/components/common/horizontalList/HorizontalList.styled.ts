@@ -1,7 +1,6 @@
-import Button from 'components/common/Button';
 import Container from 'components/common/Container';
+import { Button } from 'components/common/form';
 import styled, { css } from 'styled-components';
-import theme from 'theme';
 
 const arrowCss = css`
   min-width: 2.125rem;
@@ -13,7 +12,7 @@ const arrowCss = css`
   transform: translateY(-50%);
 
   display: none;
-  @media (min-width: ${theme.breakpoints.minWidth.lg}) {
+  @media (min-width: ${(props) => props.theme.breakpoints.minWidth.lg}) {
     display: flex;
   }
 `;

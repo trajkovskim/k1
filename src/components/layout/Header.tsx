@@ -1,41 +1,21 @@
+import { Container, Line } from 'components/common';
+import { StyledHeader } from 'components/layout/Layout.styled';
+import NavigationMenu from 'components/layout/NavigationMenu';
+import LogoImage from 'components/layout/LogoImage';
+import MobileNavigation from 'components/layout/XsNavigation';
 import React from 'react';
 import { styled } from 'styled-components';
-
-import { Container, Line } from 'components/common';
-import LogoImage from 'components/layout/LogoImage';
-import MobileNavigation from 'components/layout/MobileNavigation';
-import Navigation from 'components/layout/Navigation';
-
-type WrapperProps = {
-  transparent?: boolean;
-};
-
-const Wrapper = styled.div<WrapperProps>`
-  background-color: ${(props) => !props.transparent && '#232628'};
-  color: white;
-  z-index: 10 !important;
-  position: sticky;
-  top: 0;
-`;
-
-const StyledContainer = styled(Container)`
-  z-index: 2;
-  height: 80px;
-`;
 
 const StyledLineContainer = styled(Container)`
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 `;
 
-type Props = WrapperProps;
-
-const Navbar: React.FC<Props> = (props) => {
+const Header: React.FC = () => {
   return (
-    <Wrapper transparent={props.transparent}>
-      <StyledContainer
+    <StyledHeader>
+      <Container
         styleConfig={{
-          padding: { left: 'md', right: 'md' },
           relative: true,
           direction: 'row',
           alignItems: 'center',
@@ -51,8 +31,8 @@ const Navbar: React.FC<Props> = (props) => {
         <StyledLineContainer xs={0} lg="max-content" styleConfig={{ alignSelf: 'stretch' }}>
           <Line type="vertical" />
         </StyledLineContainer>
-        <Container xs={0} lg="max-content" styleConfig={{ alignItems: 'center' }}>
-          <Navigation />
+        <Container xs={0} lg={12}>
+          <NavigationMenu mode="horizontal" />
         </Container>
 
         <Container
@@ -68,9 +48,9 @@ const Navbar: React.FC<Props> = (props) => {
           <Line type="vertical" />
           <MobileNavigation />
         </Container>
-      </StyledContainer>
-    </Wrapper>
+      </Container>
+    </StyledHeader>
   );
 };
 
-export default Navbar;
+export default Header;

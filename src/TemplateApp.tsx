@@ -1,6 +1,8 @@
 import { Footer } from 'components/layout';
 import { BackToTopButton } from 'components/layout/BackToTopButton';
 import ApplicationContextProvider from 'context';
+import ConfigProvider from 'providers/ConfigProvider';
+import ThemeProvider from 'providers/ThemeProvider';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
@@ -14,20 +16,24 @@ const StyledLayout = styled.div`
   background-color: white;
 `;
 
-const StrongAutoApp: React.FC = () => {
+const TemplateAppLayoutProvider: React.FC = () => {
   return (
-    <ApplicationContextProvider>
-      <div>
-        <StyledLayout>
-          <main>
-            <Outlet />
-          </main>
-          <Footer />
-        </StyledLayout>
-        <BackToTopButton />
-      </div>
-    </ApplicationContextProvider>
+    <ConfigProvider>
+      <ThemeProvider>
+        <ApplicationContextProvider>
+          <div>
+            <StyledLayout>
+              <main>
+                <Outlet />
+              </main>
+              <Footer />
+            </StyledLayout>
+            <BackToTopButton />
+          </div>
+        </ApplicationContextProvider>
+      </ThemeProvider>
+    </ConfigProvider>
   );
 };
 
-export default StrongAutoApp;
+export default TemplateAppLayoutProvider;

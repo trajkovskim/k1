@@ -1,69 +1,53 @@
-import Container from 'components/common/Container';
-import { StyledOption, StyledSelect } from 'components/common/form/Dropdown.styled';
+import { Select, SelectProps } from 'antd';
+import { SIZE_MAP } from 'components/common/form/constants';
 import {
-  SelectWrapper,
-  StyledBiErrorCircle,
   StyledContainer,
-  StyledGiCheckMark,
-  StyledRightContainer,
-  StyledSpinner,
+  StyledFormFieldContainer,
+  StyledInputWithRightContainerProps,
 } from 'components/common/form/Input.styled';
-import type { DropdownOption, FormFieldProps } from 'components/common/form/types';
-import { useInput } from 'components/common/hooks';
-import Label from 'components/common/typography/Label';
-import Text from 'components/common/typography/Text';
+import FormFieldRightContainer from 'components/common/form/RightContainer';
+import type { FormFieldProps } from 'components/common/form/types';
 import React, { useRef } from 'react';
+import styled from 'styled-components';
 
-type Props = FormFieldProps<'select'> & {
-  options: DropdownOption[];
-};
+const StyledSelect = styled(Select)<StyledInputWithRightContainerProps>``;
 
-const Dropdown: React.FC<Props> = ({ fullwidth, rightContainer, validate, ...props }) => {
-  const rightContainerRef = useRef<HTMLDivElement>(null);
+type Props = FormFieldProps<SelectProps>;
 
-  const { state, onChange, onBlur, onFocus } = useInput(
-    props.defaultValue,
-    props.onChange,
-    props.onFocus,
-    props.onBlur,
-    validate
-  );
+const Dropdown: React.FC<Props> = ({
+  state,
+  fullwidth,
+  rightContainer,
+  label,
+  clearButton,
+  validate,
+  size,
+  ...props
+}) => {
+  const rightContainerRef = useRef<HTMLSpanElement>(null);
 
-  const events = { onChange, onBlur, onFocus };
+  const rightContainerProps = {
+    state,
+    rightContainer,
+    clearButton,
+    validate: !!validate,
+    size: size,
+    onClear: props.onClear,
+    value: props.value,
+  };
 
   return (
     <StyledContainer fullwidth={fullwidth}>
-      <Container styleConfig={{ direction: 'row', gap: '1rem', alignItems: 'center' }}>
-        {props.label && (
-          <Label nowrap fontSize={props.size}>
-            {props.label}
-          </Label>
-        )}
-        <SelectWrapper size={props.size}>
-          <StyledSelect {...props} {...events} rightcontainerwidth={rightContainerRef.current?.offsetWidth}>
-            {props.options.map((option) => (
-              <StyledOption key={option.value} value={option.value}>
-                <Text fontSize={props.size}>{option.label ?? option.value}</Text>
-              </StyledOption>
-            ))}
-          </StyledSelect>
-          <StyledRightContainer ref={rightContainerRef}>
-            {state.dirty && validate && (
-              <span>
-                {state.validating ? (
-                  <StyledSpinner />
-                ) : state.valid ? (
-                  <StyledGiCheckMark />
-                ) : (
-                  <StyledBiErrorCircle title={state.error} />
-                )}
-              </span>
-            )}
-            {rightContainer}
-          </StyledRightContainer>
-        </SelectWrapper>
-      </Container>
-      {!state.valid && <div>{state.error}</div>}
+      <StyledFormFieldContainer label={label} size={size}>
+        <StyledSelect
+          size={size && SIZE_MAP[size]}
+          newSize={size}
+          {...props}
+          rightcontainerwidth={rightContainerRef.current?.offsetWidth}
+        />
+      </StyledFormFieldContainer>
+      <FormFieldRightContainer ref={rightContainerRef} {...rightContainerProps} />
+      {!state?.valid && state?.error && <div>{state.error}</div>}
     </StyledContainer>
   );
 };

@@ -1,5 +1,5 @@
+import { FacebookFilled, InstagramFilled } from '@ant-design/icons';
 import React from 'react';
-import { FaFacebook, FaInstagram } from 'react-icons/fa';
 
 enum SocialMedia {
   FACEBOOK = 'facebook',
@@ -12,13 +12,13 @@ const useSocialMedias = () => {
   return [
     {
       type: SocialMedia.FACEBOOK,
-      icon: React.createElement(FaFacebook),
-      href: 'https://www.facebook.com/p/Strong-AUTO-100032330904215/',
+      icon: React.createElement(FacebookFilled),
+      href: '#',
     },
     {
       type: SocialMedia.INSTAGRAM,
-      icon: React.createElement(FaInstagram),
-      href: 'https://www.instagram.com/strongautostrumica/',
+      icon: React.createElement(InstagramFilled),
+      href: '#',
     },
   ];
 };

@@ -1,5 +1,6 @@
+import { DefaultOptionType } from 'antd/es/select';
 import { StyledContainerProps, StyledInputProps } from 'components/common/form/Input.styled';
-import { FontSize } from 'components/common/typography/types';
+import { Breakpoints } from 'theme';
 import { Validator } from 'validators';
 
 export type FormFieldValue = string | string[] | boolean | boolean[] | number | undefined | null;
@@ -11,26 +12,28 @@ export type FormContextType<T> = {
   setValues: (value: T | ((values: T) => T)) => void;
 };
 
-export type Size = FontSize;
+export type ControlSize = Breakpoints;
+export type OptionType = DefaultOptionType;
 
-export type DropdownOption = {
-  value: string;
-  label?: string;
+export type FormFieldState<Value> = {
+  error?: string;
+  touched?: boolean;
+  validating?: boolean;
+  visited?: boolean;
+  modified?: boolean;
+  active?: boolean;
+  dirty?: boolean;
+  valid: boolean;
+  initial: Value;
 };
 
-export type AutocompleteOption = {
-  label?: React.ReactNode;
-  value: string;
-};
-
-export type FormFieldProps<T extends keyof React.JSX.IntrinsicElements | React.JSXElementConstructor<unknown>> = Omit<
-  React.ComponentProps<T>,
-  keyof StyledInputProps
-> &
+export type FormFieldProps<Props, Value = string> = Omit<Props, keyof StyledInputProps | 'size'> &
   StyledInputProps &
   StyledContainerProps & {
     label?: string;
     rightContainer?: React.ReactNode;
     validate?: Validator;
     clearButton?: boolean;
+    size?: ControlSize;
+    state?: FormFieldState<Value>;
   };

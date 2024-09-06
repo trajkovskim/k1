@@ -1,10 +1,7 @@
-import { iconFontSize } from 'components/common/typography/constants';
-import { FontSize } from 'components/common/typography/types';
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { createMedia } from 'utils';
+import styled from 'styled-components';
 
-type Size = FontSize;
+type Size = string;
 
 type IconWrapperProps = {
   width?: string;
@@ -31,23 +28,6 @@ const IconWrapper = styled.span<IconWrapperProps>`
     height: ${(props) => props.height ?? '100%'};
 
     width: ${(props) => !props.size && (props.width ? props.width : '100%')};
-    width: ${(props) => props.size && iconFontSize[props.size]};
-
-    ${(props) =>
-      createMedia(
-        'sm',
-        css`
-          width: ${props.size && iconFontSize[props.size]};
-        `
-      )}
-
-    ${(props) =>
-      createMedia(
-        'md',
-        css`
-          width: ${props.size && iconFontSize[props.size]};
-        `
-      )}
   }
 
   img {
@@ -58,24 +38,6 @@ const IconWrapper = styled.span<IconWrapperProps>`
     height: ${(props) => props.height ?? '100%'};
 
     width: ${(props) => !props.size && (props.width ? props.width : '100%')};
-
-    width: ${(props) => props.size && iconFontSize[props.size]};
-
-    ${(props) =>
-      createMedia(
-        'sm',
-        css`
-          width: ${props.size && iconFontSize[props.size]};
-        `
-      )}
-
-    ${(props) =>
-      createMedia(
-        'md',
-        css`
-          width: ${props.size && iconFontSize[props.size]};
-        `
-      )}
   }
 `;
 

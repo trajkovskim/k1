@@ -1,6 +1,6 @@
 export type ValidatorValue = string | undefined;
 
-export type Validator<T = unknown> = (value: ValidatorValue, allValues?: T) => ValidatorReturn;
+export type Validator<Value = string, T = unknown> = (value: Value, allValues?: T) => ValidatorReturn;
 
 export type ValidatorReturn = string | undefined;
 
@@ -9,8 +9,8 @@ type Message = {
 };
 
 export const combine =
-  <T>(validators: Validator<T>[]) =>
-  (value: string, allValues: T) => {
+  <Value, T>(validators: Validator<Value, T>[]) =>
+  (value: Value, allValues: T) => {
     for (const validator of validators) {
       const message = validator(value, allValues);
       if (message) {
@@ -21,7 +21,9 @@ export const combine =
     return undefined;
   };
 
-type WithMessageValidator<M extends Message = Message, T = unknown> = (params: M) => Validator<T>;
+type WithMessageValidator<M extends Message = Message, Value = string, T = unknown> = (
+  params: M
+) => Validator<Value, T>;
 
 export const requiredValidator: WithMessageValidator =
   ({ message }) =>

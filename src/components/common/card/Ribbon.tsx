@@ -36,7 +36,7 @@ const Ribbon: React.FC<Props> = ({ className, ...props }) => {
       xs="max-content"
     >
       {props.label && (
-        <Text bold fontSize="sm">
+        <Text strong size="sm">
           {t(props.label)}
         </Text>
       )}

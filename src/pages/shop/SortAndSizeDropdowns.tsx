@@ -18,7 +18,6 @@ const SortAndSizeDropdowns: React.FC<Props> = (props) => {
   return (
     <>
       <Dropdown
-        name="sortBy"
         noBorder
         size="md"
         label={t('pagination.sortByInput.label')}
@@ -28,7 +27,6 @@ const SortAndSizeDropdowns: React.FC<Props> = (props) => {
         options={convertSortByToOptions(t)}
       />
       <Dropdown
-        name="size"
         noBorder
         size="md"
         label={t('pagination.resultSizeInput.label')}

@@ -1,5 +1,5 @@
 import { Collapse as CollapseAntd } from 'antd';
-import Button from 'components/common/Button';
+import { Button } from 'components/common/form';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -46,7 +46,7 @@ const Accordion = React.forwardRef<HTMLDivElement, Props>(
           {
             key: '1',
             label: (
-              <Button themeType="link" size="lg" maxContent {...buttonProps}>
+              <Button size="lg" {...buttonProps}>
                 {header}
               </Button>
             ),

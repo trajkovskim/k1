@@ -1,6 +1,6 @@
+import { HeartFilled, HeartOutlined } from '@ant-design/icons';
 import { Button } from 'components/common';
 import React from 'react';
-import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
 
 type Props = {
   bookmarked?: boolean;
@@ -9,15 +9,7 @@ type Props = {
 
 const BookmarkedButton: React.FC<Props> = (props) => {
   return null;
-  return (
-    <Button
-      maxContent
-      themeType="link"
-      iconSize="lg"
-      icon={props.bookmarked ? <MdFavorite /> : <MdFavoriteBorder />}
-      onClick={props.onClick}
-    />
-  );
+  return <Button icon={props.bookmarked ? <HeartFilled /> : <HeartOutlined />} onClick={props.onClick} />;
 };
 
 export default BookmarkedButton;

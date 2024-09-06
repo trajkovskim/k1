@@ -1,5 +1,4 @@
-import { fontSize, inputSize } from 'components/common/form/constants';
-import { FontSize } from 'components/common/typography';
+import { ControlSize } from 'components/common/form/types';
 
 export const triggerChange = (input: HTMLElement, newValue: string | undefined) => {
   const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set;
@@ -21,5 +20,5 @@ export const parseInputValue = (input: HTMLInputElement) => {
   return input.value;
 };
 
-export const getCalcInputHeightCss = (size: FontSize, includeLabelSize = false) =>
-  includeLabelSize ? `calc(${inputSize[size]} + ${fontSize[size]} / 2)` : inputSize[size];
+export const getCalcInputHeightCss = (theme: any, size: ControlSize, includeLabelSize = false) =>
+  includeLabelSize ? `calc(${theme.controlHeight[size]} + ${theme.fontSize[size]} / 2)` : theme.controlHeight[size];

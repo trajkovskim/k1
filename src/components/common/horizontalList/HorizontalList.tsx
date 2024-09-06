@@ -1,3 +1,4 @@
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import Container, { ContainerBreakpointsProps } from 'components/common/Container';
 import {
   HorizontalListChildrenWrapper,
@@ -12,7 +13,6 @@ import {
   createHorizontalListService,
 } from 'components/common/horizontalList/horizontalListUtils';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 
 type Props = React.PropsWithChildren &
   HorizontalListWrapperProps & {
@@ -137,20 +137,8 @@ const HorizontalList: React.FC<Props> = ({ intervalMs = 10000, autoScroll, arrow
       </HorizontalListChildrenWrapper>
       {arrows && (
         <>
-          <StyledLeftArrowButton
-            icon={<MdArrowBackIos />}
-            maxContent
-            size="md"
-            themeType="link"
-            onClick={onBackButtonClick}
-          />
-          <StyledRightArrowButton
-            icon={<MdArrowForwardIos />}
-            maxContent
-            size="md"
-            themeType="link"
-            onClick={onForwardButtonClick}
-          />
+          <StyledLeftArrowButton icon={<LeftOutlined />} type="link" size="md" onClick={onBackButtonClick} />
+          <StyledRightArrowButton icon={<RightOutlined />} type="link" size="md" onClick={onForwardButtonClick} />
         </>
       )}
     </HorizontalListWrapper>
