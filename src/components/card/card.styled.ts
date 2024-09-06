@@ -2,7 +2,7 @@ import { Card } from 'components/common';
 import styled from 'styled-components';
 
 export const StyledCard = styled(Card)`
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  box-shadow: ${(props) => props.theme.antd.boxShadowTertiary};
 
   transition: 400ms;
 
@@ -17,7 +17,8 @@ export const StyledCard = styled(Card)`
     z-index: 3;
   }
 
-  color: white;
+  border-radius: ${(props) => props.theme.antd.borderRadiusLG};
+  color: ${(props) => props.theme.antd.colorText};
 `;
 
 export const StyledShopProductCard = styled(StyledCard)`

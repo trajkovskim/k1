@@ -11,13 +11,11 @@ type Props = React.ComponentProps<typeof Typography.Title> & {
   size?: FontSize | TitleAndDescription<FontSize>;
 };
 
-const Title: React.FC<Props> = (props) => {
+const Title: React.FC<Props> = ({ className, title, description, gap, size, ...props }) => {
   return (
-    <Container className={props.className} styleConfig={{ gap: props.gap ?? '0.5rem' }}>
-      <Typography.Title>{props.title}</Typography.Title>
-      {props.description && (
-        <Text size={typeof props.size === 'object' ? props.size.description : props.size}>{props.description}</Text>
-      )}
+    <Container className={className} styleConfig={{ gap: gap ?? '0.5rem' }}>
+      <Typography.Title {...props}>{title}</Typography.Title>
+      {description && <Text size={typeof size === 'object' ? size.description : size}>{description}</Text>}
     </Container>
   );
 };

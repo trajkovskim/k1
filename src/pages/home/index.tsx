@@ -9,7 +9,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledTitle = styled(Title)`
-  color: #fff;
+  .ant-typography {
+    color: ${(props) => props.theme.antd.colorTextLightSolid};
+  }
 `;
 
 const Home: React.FC = () => {

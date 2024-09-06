@@ -137,8 +137,8 @@ const HorizontalList: React.FC<Props> = ({ intervalMs = 10000, autoScroll, arrow
       </HorizontalListChildrenWrapper>
       {arrows && (
         <>
-          <StyledLeftArrowButton icon={<LeftOutlined />} type="link" size="md" onClick={onBackButtonClick} />
-          <StyledRightArrowButton icon={<RightOutlined />} type="link" size="md" onClick={onForwardButtonClick} />
+          <StyledLeftArrowButton icon={<LeftOutlined />} type="text" size="md" onClick={onBackButtonClick} />
+          <StyledRightArrowButton icon={<RightOutlined />} type="text" size="md" onClick={onForwardButtonClick} />
         </>
       )}
     </HorizontalListWrapper>

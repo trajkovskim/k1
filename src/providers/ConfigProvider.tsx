@@ -15,8 +15,8 @@ const ConfigProvider: React.FC<Props> = ({ children }) => {
           },
         },
         token: {
-          colorPrimary: '#000',
-          fontSize: remToPx(0.875),
+          // colorPrimary: '#000',
+          fontSize: remToPx(1),
           padding: 3.2,
         },
       }}

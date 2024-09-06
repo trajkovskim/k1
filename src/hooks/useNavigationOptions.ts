@@ -21,7 +21,7 @@ const useNavigationOptions = () => {
     [Routes.INDEX]: {
       label: t('home'),
       navigate: () => navigate(Routes.INDEX),
-      active: location.pathname === Routes.INDEX,
+      active: !location.pathname.length || location.pathname === Routes.INDEX,
       icon: React.createElement(HomeOutlined),
     },
     [Routes.SHOP]: {

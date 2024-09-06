@@ -12,11 +12,6 @@ type StyledTextProps = {
 const StyledText = styled(Typography.Text)<StyledTextProps>`
   white-space: ${(props) => props.nowrap && 'nowrap'};
   font-size: ${(props) => props.size && props.theme.fontSize[props.size]} !important;
-
-  ${(props) => {
-    console.log(props.theme.antd);
-    return '';
-  }}
 `;
 
 type Props = React.ComponentProps<typeof Typography.Text> & StyledTextProps;

@@ -20,10 +20,12 @@ const Header: React.FC = () => {
           direction: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
+          minHeight: '100%',
         }}
         lgStyle={{
           justifyContent: 'start',
           gap: '2rem',
+          padding: { left: 'lg' },
         }}
       >
         <Container xs={1} lg={0} styleConfig={{ direction: 'row', gap: '0.5rem' }} />

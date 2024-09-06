@@ -50,7 +50,7 @@ const MobileNavigation: React.FC = () => {
         </Container>
       </StyledSidebar>
 
-      <Button icon={<MenuOutlined />} onClick={() => setOpen(true)} />
+      <Button icon={<MenuOutlined />} type="text" onClick={() => setOpen(true)} />
     </>
   );
 };

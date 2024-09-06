@@ -79,8 +79,6 @@ export default {
       'border-inline-end': '0 !important',
     },
     content: {},
-    footer: {
-      color: '#fff',
-    },
+    footer: {},
   },
 };
