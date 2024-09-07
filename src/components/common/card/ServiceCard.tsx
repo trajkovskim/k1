@@ -1,35 +1,26 @@
-import Container from 'components/common/Container';
+import Meta from 'antd/es/card/Meta';
 import Image from 'components/common/Image';
 import Card from 'components/common/card/Card';
-import Text from 'components/common/typography/Text';
 import React from 'react';
-import styled from 'styled-components';
 
-const StyledCard = styled(Card)`
-  transition: 200ms all;
-
-  cursor: ${(props) => !!props.onClick && 'pointer'};
-`;
-
-type Props = React.ComponentProps<typeof Container> & {
+type Props = {
   image?: string;
   title: React.ReactNode;
-  description: React.ReactNode;
+  description?: React.ReactNode;
+  onClick?: () => void;
 };
 
 const ServiceCard: React.FC<Props> = (props) => {
-  const body = (
-    <Container xs={12} styleConfig={{ gap: '1rem', padding: { top: 'lg' } }}>
-      <Text size="2xl" strong>
-        {props.title}
-      </Text>
-      <Text size="lg">{props.description}</Text>
-    </Container>
+  return (
+    <Card
+      transparent
+      bordered={false}
+      shadow={false}
+      body={<Meta title={props.title} description={props.description} />}
+      cover={<Image src={props.image} objectFit="cover" height="250px" />}
+      onClick={props.onClick}
+    />
   );
-
-  const image = <Image src={props.image} objectFit="cover" height="250px" />;
-
-  return <StyledCard {...props} body={body} image={image} onClick={props.onClick} />;
 };
 
 export default ServiceCard;

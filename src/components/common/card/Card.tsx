@@ -1,39 +1,41 @@
 import Container from 'components/common/Container';
 import React from 'react';
 import styled from 'styled-components';
+import { Card as AntdCard } from 'antd';
 
 type StyledCardProps = {
-  fullwidth?: boolean;
+  transparent?: boolean;
+  shadow?: boolean;
 };
 
-const StyledCard = styled(Container)<StyledCardProps>`
-  box-sizing: border-box;
-
-  height: 100%;
-  max-width: ${(props) => props.fullwidth && '100%'};
-
-  cursor: ${(props) => !!props.onClick && 'pointer'};
-
-  overflow: hidden;
-  border-radius: 5px;
+const StyledCard = styled(AntdCard)<StyledCardProps>`
+  background: ${(props) => props.transparent && 'transparent'};
+  box-shadow: ${(props) => !props.shadow && 'none !important'};
 `;
 
-type Props = StyledCardProps & {
-  footer?: React.ReactNode;
-  image?: React.ReactNode;
-  onImageContainer?: React.ReactNode;
-  body?: React.ReactNode;
-} & React.ComponentProps<typeof Container>;
+type Props = React.ComponentProps<typeof AntdCard> &
+  StyledCardProps & {
+    footer?: React.ReactNode;
+    cover?: React.ReactNode;
+    onImageContainer?: React.ReactNode;
+    body?: React.ReactNode;
+  };
 
-const Card: React.FC<Props> = ({ footer, image, onImageContainer, body, ...props }) => {
+const Card: React.FC<Props> = ({ footer, cover, onImageContainer, body, ...props }) => {
+  props.shadow = props.shadow ?? true;
+
   return (
-    <StyledCard {...props} fullwidth={props.fullwidth} styleConfig={{ alignItems: 'stretch', ...props.styleConfig }}>
-      <Container xs={12} styleConfig={{ relative: true }}>
-        {image}
-        {onImageContainer}
-      </Container>
-      {body && <Container xs={12}>{body}</Container>}
-      {footer && <Container xs={12}>{footer}</Container>}
+    <StyledCard
+      {...props}
+      cover={
+        <Container xs={12} styleConfig={{ relative: true }}>
+          {cover}
+          {onImageContainer}
+        </Container>
+      }
+    >
+      {body}
+      {footer}
     </StyledCard>
   );
 };

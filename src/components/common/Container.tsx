@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import theme, { Breakpoints, PaddingValues } from 'theme';
+import { Breakpoints, PaddingValues } from 'theme';
 import { createMedia } from 'utils';
 
 export type ContainerBreakpointsProps = {
@@ -29,9 +29,11 @@ type StyledContainerBaseProps = ContainerParentGapBreakpointsProps & {
   parentGap?: React.CSSProperties['gap'];
 };
 
+type ContainerPaddingValues = PaddingValues | Sides<PaddingValues | number> | number;
+
 type StyledContainerStyleProps = {
-  margin?: PaddingValues | Sides<PaddingValues>;
-  padding?: PaddingValues | Sides<PaddingValues>;
+  margin?: ContainerPaddingValues;
+  padding?: ContainerPaddingValues;
   direction?: React.CSSProperties['flexDirection'];
   alignItems?: React.CSSProperties['alignItems'];
   alignSelf?: React.CSSProperties['alignSelf'];
@@ -105,33 +107,37 @@ const createMediaQ = (props: StyledContainerProps, breakpoint: Breakpoints, csss
       max-width: ${typeof breakpointValue === 'number' &&
       `calc(${calculateColumnPercentage(breakpointValue)} - ${calculateColumnGap(breakpointValue, parentGap)})`};
 
-      ${createStyleProps(props[`${breakpoint}Style`])}
+      ${createStyleProps(props, props[`${breakpoint}Style`])}
       ${csss};
     `
   );
 };
 
-export const createPaddingProperty = (padding?: Sides<PaddingValues> | PaddingValues) => css`
-  padding: ${typeof padding === 'string' && theme.padding[padding]};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const parsePaddingValue = (props: any, value: PaddingValues | number) =>
+  typeof value === 'string' ? props.theme.padding[value] : value + 'px';
+
+export const createPaddingProperty = (props: unknown, padding: ContainerPaddingValues) => css`
+  padding: ${typeof padding === 'string' && parsePaddingValue(props, padding)};
 
   ${typeof padding === 'object' &&
   css`
-    padding-top: ${padding.top && theme.padding[padding.top]};
-    padding-bottom: ${padding.bottom && theme.padding[padding.bottom]};
-    padding-left: ${padding.left && theme.padding[padding.left]};
-    padding-right: ${padding.right && theme.padding[padding.right]};
+    padding-top: ${padding.top && parsePaddingValue(props, padding.top)};
+    padding-bottom: ${padding.bottom && parsePaddingValue(props, padding.bottom)};
+    padding-left: ${padding.left && parsePaddingValue(props, padding.left)};
+    padding-right: ${padding.right && parsePaddingValue(props, padding.right)};
   `}
 `;
 
-export const createMarginProperty = (margin?: Sides<PaddingValues> | PaddingValues) => css`
-  margin: ${typeof margin === 'string' && theme.padding[margin]};
+export const createMarginProperty = (props: unknown, margin: ContainerPaddingValues) => css`
+  margin: ${typeof margin === 'string' && parsePaddingValue(props, margin)};
 
   ${typeof margin === 'object' &&
   css`
-    margin-top: ${margin.top && theme.padding[margin.top]};
-    margin-bottom: ${margin.bottom && theme.padding[margin.bottom]};
-    margin-left: ${margin.left && theme.padding[margin.left]};
-    margin-right: ${margin.right && theme.padding[margin.right]};
+    margin-top: ${margin.top && parsePaddingValue(props, margin.top)};
+    margin-bottom: ${margin.bottom && parsePaddingValue(props, margin.bottom)};
+    margin-left: ${margin.left && parsePaddingValue(props, margin.left)};
+    margin-right: ${margin.right && parsePaddingValue(props, margin.right)};
   `}
 `;
 
@@ -159,7 +165,7 @@ export const createBorderRadiusProperty = (rounded?: Edges<boolean> | boolean) =
   `}
 `;
 
-const createStyleProps = (styleConfig: StyledContainerStyleProps | undefined) =>
+const createStyleProps = (props: unknown, styleConfig: StyledContainerStyleProps | undefined) =>
   styleConfig
     ? css`
         min-height: ${styleConfig.minHeight};
@@ -177,8 +183,8 @@ const createStyleProps = (styleConfig: StyledContainerStyleProps | undefined) =>
         margin-left: ${styleConfig.centered !== 'vertical' && !!styleConfig.centered && 'auto'};
         margin-right: ${styleConfig.centered !== 'vertical' && !!styleConfig.centered && 'auto'};
 
-        ${createPaddingProperty(styleConfig.padding)};
-        ${createMarginProperty(styleConfig.margin)};
+        ${styleConfig.padding && createPaddingProperty(props, styleConfig.padding)};
+        ${styleConfig.margin && createMarginProperty(props, styleConfig.margin)};
         ${createBorderRadiusProperty(styleConfig.rounded)};
         ${createBorderProperty(styleConfig.bordered)};
 
@@ -211,7 +217,7 @@ const StyledContainer = styled.div<StyledContainerProps>`
   background: ${(props) => props.theme.antd.primaryToken.colorBgContainer};
   background: ${(props) => props.transparent && 'transparent'};
 
-  ${(props) => createStyleProps(props.styleConfig)}
+  ${(props) => createStyleProps(props, props.styleConfig)}
 
   ${(props) => createMediaQ(props, 'xs')};
   ${(props) => createMediaQ(props, 'sm')};

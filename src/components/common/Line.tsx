@@ -8,7 +8,7 @@ const Line = styled.div<{
   ${(props) =>
     (props.type === 'horizontal' || !props.type) &&
     css`
-      border-bottom: 1px solid var(--border-line-color);
+      border-bottom: 1px solid ${props.theme.antd.primaryToken.colorBorder};
       border-image: linear-gradient(to right, black 0%, #ccc 50%, transparent 100%) 1;
       width: 100%;
       max-width: ${props.width ?? '100%'};
@@ -16,7 +16,7 @@ const Line = styled.div<{
   ${(props) =>
     props.type === 'vertical' &&
     css`
-      border-right: 1px solid var(--border-line-color);
+      border-right: 1px solid ${props.theme.antd.primaryToken.colorBorder};
       min-height: ${props.height ?? '100%'};
     `};
 `;
