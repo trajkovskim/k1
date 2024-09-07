@@ -4,14 +4,10 @@ import { Language } from 'context/base';
 import { useLanguage, useTranslation } from 'hooks';
 import React from 'react';
 import styled from 'styled-components';
-const StyledDropdown = styled(Dropdown)`
-  background-color: transparent;
-  color: inherit;
 
-  option {
-    padding: 0.5rem;
-    color: #000;
-  }
+const StyledDropdown = styled(Dropdown)`
+  /* background-color: transparent; */
+  /* color: inherit; */
 `;
 
 const LanguageChanger: React.FC = () => {

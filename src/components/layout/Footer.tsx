@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
           <Container xs={12} lg={3.5} styleConfig={{ gap: '2rem' }}>
             <LogoImage />
             <Text>{t('description')}</Text>
-            <SocialMedias styleConfig={{ gap: '1.5rem', direction: 'row', alignItems: 'center' }}>
+            <SocialMedias styleConfig={{ gap: '1rem', direction: 'row', alignItems: 'center' }}>
               <Text size="sm">{tBase('followUs')}</Text>
               {socialMedias.map((socialMedia, index) => (
                 <Button

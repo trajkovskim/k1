@@ -3,14 +3,14 @@ import { ShopProductCard } from 'components/card';
 import { Button, Carousel, Container, HorizontalList, Image, Tabs, Title } from 'components/common';
 import ImageContainer from 'components/layout/ImageContainer';
 import { useTranslation } from 'hooks';
-import { DarkBackgroundContainer } from 'pages/common.styled';
+import { DarkBackgroundContainer } from 'components/layout';
 import { PAGE_MAX_WIDTH, productsMock } from 'pages/constants';
 import React from 'react';
 import styled from 'styled-components';
 
 const StyledTitle = styled(Title)`
   .ant-typography {
-    color: ${(props) => props.theme.antd.colorTextLightSolid};
+    color: ${(props) => props.theme.antd.primaryToken.colorTextLightSolid};
   }
 `;
 
@@ -22,10 +22,10 @@ const Home: React.FC = () => {
   const createImageContentContainer = (imageSrc: string, content: React.ReactNode) => (
     <div>
       <Container styleConfig={{ wrap: true, direction: 'row', gap: '3rem' }}>
-        <Container xs={12} lg={6} styleConfig={{ padding: 'lg' }}>
+        <Container xs={12} lg={6} lgStyle={{ padding: 'lg' }}>
           <Image src={imageSrc} objectFit="cover" objectPosition="center" height="500px" />
         </Container>
-        <Container xs={12} lg={6} lgStyle={{ padding: 'lg' }}>
+        <Container xs={12} lg={6} styleConfig={{ padding: 'lg' }}>
           {content}
         </Container>
       </Container>
@@ -55,7 +55,9 @@ const Home: React.FC = () => {
                 size="2xl"
                 gap={titleGap}
               />
-              <Button size="xl">{t('carousel.items.1.button')}</Button>
+              <Button type="primary" size="xl">
+                {t('carousel.items.1.button')}
+              </Button>
             </ImageContainer>
           </div>
           <div>
@@ -76,7 +78,9 @@ const Home: React.FC = () => {
                 size="2xl"
                 gap={titleGap}
               />
-              <Button>{t('carousel.items.2.button')}</Button>
+              <Button type="primary" size="xl">
+                {t('carousel.items.2.button')}
+              </Button>
             </ImageContainer>
           </div>
         </Carousel>

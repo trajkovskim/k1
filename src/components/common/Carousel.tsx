@@ -38,7 +38,6 @@ const StyledCarousel = styled(CarouselAntd)<StyledCarouselProps>`
   }
 
   & > .slick-dots button::after {
-    background: unset;
   }
 `;
 

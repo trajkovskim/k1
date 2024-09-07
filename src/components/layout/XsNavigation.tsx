@@ -45,7 +45,7 @@ const MobileNavigation: React.FC = () => {
         >
           <Text size="sm">{t('followUs')}</Text>
           {socialMedias.map((socialMedia, index) => (
-            <Button key={index} icon={socialMedia.icon} size="xl" onClick={() => goto(socialMedia.href)} />
+            <Button key={index} icon={socialMedia.icon} size="xl" type="link" onClick={() => goto(socialMedia.href)} />
           ))}
         </Container>
       </StyledSidebar>

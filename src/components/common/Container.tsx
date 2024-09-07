@@ -208,7 +208,7 @@ const StyledContainer = styled.div<StyledContainerProps>`
   box-sizing: border-box;
   display: flex;
 
-  background: ${(props) => props.theme.antd.colorBgContainer};
+  background: ${(props) => props.theme.antd.primaryToken.colorBgContainer};
   background: ${(props) => props.transparent && 'transparent'};
 
   ${(props) => createStyleProps(props.styleConfig)}

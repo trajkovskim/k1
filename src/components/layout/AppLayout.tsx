@@ -1,5 +1,6 @@
 import { Layout } from 'antd';
-import { Container } from 'components/common';
+import { BackToTopButton } from 'components/layout/BackToTopButton';
+import Footer from 'components/layout/Footer';
 import Header from 'components/layout/Header';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
@@ -7,10 +8,12 @@ import { Outlet } from 'react-router-dom';
 const AppLayout: React.FC = () => {
   return (
     <Layout>
-      <Container styleConfig={{ minHeight: '100dvh' }}>
-        <Header />
+      <Header />
+      <Layout.Content>
         <Outlet />
-      </Container>
+      </Layout.Content>
+      <Footer />
+      <BackToTopButton />
     </Layout>
   );
 };

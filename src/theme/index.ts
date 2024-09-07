@@ -1,3 +1,5 @@
+import { ThemeConfig } from 'antd';
+
 export type Breakpoints = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
 export type PaddingValues = Breakpoints | 'none';
 
@@ -10,6 +12,34 @@ export const LARGEST_BREAKPOINT: Breakpoints = '3xl';
 export const bodyFontSize = parseInt(window.getComputedStyle(document.body, null).getPropertyValue('font-size'));
 
 export const remToPx = (rem: number) => bodyFontSize * rem;
+
+export const baseTokenConfig: ThemeConfig = {
+  components: {
+    Layout: {
+      headerBg: '#fff',
+      footerBg: '#232323',
+    },
+  },
+  token: {
+    colorPrimary: '#266431',
+    colorLink: '#42a046',
+    fontFamily: 'Noto Sans, sans-serif',
+    fontSize: remToPx(1),
+    padding: 3.2,
+  },
+};
+
+export const secondaryTokenConfig: ThemeConfig = {
+  token: {
+    colorPrimary: '#fff',
+    colorBgBase: '#232323',
+    colorText: '#fff',
+    colorLink: '#42a046',
+    fontFamily: 'Noto Sans, sans-serif',
+    fontSize: remToPx(1),
+    padding: 3.2,
+  },
+};
 
 export default {
   padding: {
@@ -62,9 +92,9 @@ export default {
   },
   button: {
     link: {
-      width: 'max-content',
-      'padding-right': '0',
-      'padding-left': '0',
+      width: 'max-content !important',
+      padding: '0',
+      height: 'max-content !important',
     },
   },
   layout: {
@@ -79,6 +109,8 @@ export default {
       'border-inline-end': '0 !important',
     },
     content: {},
-    footer: {},
+    footer: {
+      color: '#fff',
+    },
   },
 };

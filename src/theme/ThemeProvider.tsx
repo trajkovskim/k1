@@ -1,19 +1,26 @@
-import { theme as antdTheme } from 'antd';
+import { ConfigProvider as AntdConfigProvider, theme as antdTheme } from 'antd';
+import getDesignToken from 'antd/es/theme/getDesignToken';
 import React from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
-import { default as customTheme } from 'theme';
+import { baseTokenConfig, default as customTheme, secondaryTokenConfig } from 'theme';
 
 type Props = React.PropsWithChildren;
 
 const ThemeProvider: React.FC<Props> = ({ children }) => {
   const { token } = antdTheme.useToken();
 
+  const secondaryToken = getDesignToken(secondaryTokenConfig);
+
   const fontSizeScale = (token.fontSize / token.fontSizeSM - 1) / 2;
   const controlHeightScale = (token.controlHeight / token.controlHeightSM - 1) / 2;
+
   return (
     <StyledThemeProvider
       theme={{
-        antd: token,
+        antd: {
+          primaryToken: token,
+          secondaryToken,
+        },
         ...customTheme,
         fontSize: {
           xs: (fontSizeScale + 1) * token.fontSizeSM + 'px',
@@ -40,4 +47,12 @@ const ThemeProvider: React.FC<Props> = ({ children }) => {
   );
 };
 
-export default ThemeProvider;
+export const BaseConfigProvider: React.FC<Props> = ({ children }) => {
+  return (
+    <AntdConfigProvider theme={baseTokenConfig}>
+      <ThemeProvider>{children}</ThemeProvider>
+    </AntdConfigProvider>
+  );
+};
+
+export default BaseConfigProvider;
