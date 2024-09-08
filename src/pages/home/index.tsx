@@ -60,10 +60,35 @@ const Home: React.FC = () => {
                 padding: 'lg',
                 textAlign: 'center',
                 alignItems: 'center',
+                justifyContent: 'center',
                 minHeight: '600px',
                 gap: '2rem',
               }}
-              lgStyle={{ padding: 'xl', textAlign: 'start', alignItems: 'start' }}
+              lgStyle={{ padding: 'xl', textAlign: 'start', alignItems: 'start', justifyContent: 'start' }}
+            >
+              <Title
+                title={t('carousel.items.0.title')}
+                description={t('carousel.items.0.description')}
+                size="2xl"
+                gap={titleGap}
+              />
+              <Button type="primary" size="xl">
+                {t('carousel.items.0.button')}
+              </Button>
+            </ImageContainer>
+          </div>
+          <div>
+            <ImageContainer
+              imageSrc={GirlHandHerbalifeShake}
+              styleConfig={{
+                padding: 'lg',
+                textAlign: 'center',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: '600px',
+                gap: '2rem',
+              }}
+              lgStyle={{ padding: 'xl', textAlign: 'start', alignItems: 'start', justifyContent: 'start' }}
             >
               <Title
                 title={t('carousel.items.1.title')}
@@ -76,35 +101,14 @@ const Home: React.FC = () => {
               </Button>
             </ImageContainer>
           </div>
-          <div>
-            <ImageContainer
-              imageSrc={GirlHandHerbalifeShake}
-              styleConfig={{
-                padding: 'lg',
-                textAlign: 'center',
-                alignItems: 'center',
-                minHeight: '600px',
-                gap: '2rem',
-              }}
-              lgStyle={{ padding: 'xl', textAlign: 'start', alignItems: 'start' }}
-            >
-              <Title
-                title={t('carousel.items.2.title')}
-                description={t('carousel.items.2.description')}
-                size="2xl"
-                gap={titleGap}
-              />
-              <Button type="primary" size="xl">
-                {t('carousel.items.2.button')}
-              </Button>
-            </ImageContainer>
-          </div>
         </Carousel>
       </Container>
 
       {/* Section 1 */}
       <Container xs={`calc(100% - (100% - ${PAGE_MAX_WIDTH}) / 2)`} styleConfig={{ alignSelf: 'end', gap: '2rem' }}>
-        <Container styleConfig={{ gap: '10px', direction: 'row', alignItems: 'center' }}>
+        <Container
+          styleConfig={{ gap: '10px', direction: 'row', alignItems: 'center', padding: { left: 'md', right: 'md' } }}
+        >
           <Title title={t('section1.title')} size="lg" gap={titleGap} />
           <Button
             type="link"
@@ -130,8 +134,10 @@ const Home: React.FC = () => {
       </Container>
 
       {/* Section 2 */}
-      <Container xs={PAGE_MAX_WIDTH} styleConfig={{ centered: true, gap: '2rem', padding: 'md' }}>
-        <Container styleConfig={{ gap: '10px', direction: 'row', alignItems: 'center' }}>
+      <Container xs={PAGE_MAX_WIDTH} styleConfig={{ centered: true, gap: '2rem' }}>
+        <Container
+          styleConfig={{ gap: '10px', direction: 'row', alignItems: 'center', padding: { left: 'md', right: 'md' } }}
+        >
           <Title title={t('section2.title')} size="lg" gap={titleGap} />
           <Button
             type="link"
@@ -141,12 +147,12 @@ const Home: React.FC = () => {
             onClick={() => navigate(Routes.SHOP)}
           />
         </Container>
-        <Container styleConfig={{ gap: '60px', direction: 'row', wrap: true, alignItems: 'center' }}>
+        <Container styleConfig={{ gap: '40px', direction: 'row', wrap: true, alignItems: 'center' }}>
           <Container xs={12} lg={4}>
             <ServiceCard
               title={t('section2.card.0.title')}
+              description={t('section2.card.0.description')}
               image={Basic10DaysImage}
-              description="Basic"
               imageHeight="400px"
               onClick={() => navigate(Routes.SHOP_VIEW_DETAILS.replace(':id', '0'))}
             />
@@ -154,8 +160,8 @@ const Home: React.FC = () => {
           <Container xs={12} lg={4}>
             <ServiceCard
               title={t('section2.card.1.title')}
+              description={t('section2.card.1.description')}
               image={Sport10DaysImage}
-              description="Sport"
               imageHeight="400px"
               onClick={() => navigate(Routes.SHOP_VIEW_DETAILS.replace(':id', '0'))}
             />
@@ -163,8 +169,8 @@ const Home: React.FC = () => {
           <Container xs={12} lg={4}>
             <ServiceCard
               title={t('section2.card.2.title')}
+              description={t('section2.card.2.description')}
               image={Detox10DaysImage}
-              description="Detox"
               imageHeight="400px"
               onClick={() => navigate(Routes.SHOP_VIEW_DETAILS.replace(':id', '0'))}
             />

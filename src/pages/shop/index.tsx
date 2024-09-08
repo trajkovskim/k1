@@ -52,22 +52,23 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
 };
 
 const Shop: React.FC = () => {
+  const t = useTranslation('shop');
   const [filters, setFilters] = useState<ProductFilters>({});
   const [sortBy, setSortBy] = useState<SortBy>(SortBy.UNSORTED);
 
   const products = searchProducts(filters, sortBy);
 
   return (
-    <Container styleConfig={{ gap: '0rem', padding: { bottom: 'xl' } }} lgStyle={{ gap: '3rem' }}>
+    <Container lgStyle={{ gap: '3rem', padding: { bottom: 'xl' } }}>
       <PageHeader xs={12} styleConfig={{ direction: 'row', centered: true, padding: 'lg' }}>
-        <Title title="Shop" />
+        <Title title={t('title')} />
       </PageHeader>
 
       <ListHeader setFilters={setFilters} sortBy={sortBy} onSortByChange={setSortBy} />
 
       <Container
         xs={PAGE_MAX_WIDTH}
-        styleConfig={{ wrap: true, direction: 'row', centered: true, gap: '10px' }}
+        styleConfig={{ wrap: true, direction: 'row', centered: true }}
         lgStyle={{ gap: '20px' }}
       >
         {products.map((product) => (
