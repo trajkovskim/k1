@@ -1,36 +1,30 @@
 import { GlobalOutlined } from '@ant-design/icons';
-import { Container, Dropdown, Icon, OptionType } from 'components/common';
+import { Dropdown } from 'antd';
+import { Container, Icon, Text } from 'components/common';
 import { Language } from 'context/base';
 import { useLanguage, useTranslation } from 'hooks';
 import React from 'react';
-import styled from 'styled-components';
 
-const StyledDropdown = styled(Dropdown)`
-  /* background-color: transparent; */
-  /* color: inherit; */
-`;
+type Props = {
+  label?: boolean;
+};
 
-const LanguageChanger: React.FC = () => {
+const LanguageChanger: React.FC<Props> = (props) => {
   const t = useTranslation('languages');
   const { language, changeLanguage } = useLanguage();
 
-  const languageOptions: OptionType[] = Object.values(Language).map((value) => ({
-    value,
-    label: t(value),
+  const languageOptions = Object.values(Language).map((value) => ({
+    key: value,
+    label: <Text onClick={() => changeLanguage(value)}>{t(value)}</Text>,
   }));
 
   return (
-    <Container styleConfig={{ gap: '0.5rem', direction: 'row', alignItems: 'center' }}>
-      <Icon icon={<GlobalOutlined />} size="lg" />
-      <StyledDropdown
-        noBorder
-        value={language}
-        onChange={(value) => {
-          changeLanguage(value as Language);
-        }}
-        options={languageOptions}
-      />
-    </Container>
+    <Dropdown menu={{ items: languageOptions }} trigger={['click', 'hover']}>
+      <Container styleConfig={{ direction: 'row', alignItems: 'center', gap: '1rem' }}>
+        <Icon icon={<GlobalOutlined />} size="lg" />
+        {props.label && t(language)}
+      </Container>
+    </Dropdown>
   );
 };
 

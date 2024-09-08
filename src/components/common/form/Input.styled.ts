@@ -34,18 +34,39 @@ export const StyledTextarea = styled(AntdInput.TextArea)<StyledInputWithRightCon
   ${inputCss}
 `;
 
-type StyledFormFieldContainerProps = { label?: string; size?: ControlSize };
+type StyledFormFieldContainerProps = {
+  label?: string;
+  fullwidth?: boolean;
+  size?: ControlSize;
+};
 
 export const StyledFormFieldContainer = styled.div<StyledFormFieldContainerProps>`
   position: relative;
   font-size: ${(props) => props.size && props.theme.fontSize[props.size]};
 
+  [class^='ant-'][class*='-borderless'] {
+    padding-left: 0;
+
+    .ant-select-selector {
+      padding-left: 0;
+    }
+  }
+
   ${(props) =>
     props.label &&
     css`
-      input {
-        height: ${props.size && getCalcInputHeightCss(props.theme, props.size, true)};
-        padding-top: ${props.size && getCalcPaddingTopCss(props.theme, props.size)};
+      input,
+      .ant-select {
+        height: ${props.size && getCalcInputHeightCss(props.theme, props.size, true)} !important;
+      }
+
+      .ant-select-arrow,
+      .ant-select-selection-item {
+        padding-top: ${props.size && getCalcPaddingTopCss(props.theme, props.size)} !important;
+      }
+
+      &:has([class^='ant-'][class*='-borderless'])::before {
+        left: 0;
       }
 
       &::before {
@@ -102,4 +123,8 @@ export const StyledContainer = styled.div<StyledContainerProps>`
   /* position: relative; */
   width: 100%;
   max-width: ${(props) => (props.fullwidth ? '100%' : 'max-content')};
+
+  .ant-select {
+    width: ${(props) => (props.fullwidth ? '100%' : 'max-content')};
+  }
 `;

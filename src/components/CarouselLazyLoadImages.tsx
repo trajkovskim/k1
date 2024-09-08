@@ -24,8 +24,7 @@ const CarouselLazyLoadImages = React.forwardRef<CarouselRef, Props>(
             <Image
               preview={preview}
               onClick={() => props.onImageClick?.(index)}
-              shadow
-              objectFit="cover"
+              objectFit="contain"
               height={height}
               srcSet={image}
               src={SpinnerGIF}

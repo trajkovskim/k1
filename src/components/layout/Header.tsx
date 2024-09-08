@@ -1,4 +1,5 @@
 import { Container, Line } from 'components/common';
+import LanguageChanger from 'components/LanguageChanger';
 import { StyledHeader } from 'components/layout/Layout.styled';
 import LogoImage from 'components/layout/LogoImage';
 import NavigationMenu from 'components/layout/NavigationMenu';
@@ -31,8 +32,9 @@ const Header: React.FC = () => {
         <Container xs={0} lg={12}>
           <NavigationMenu mode="horizontal" />
         </Container>
-        <Container xs={0} lg="max-content">
+        <Container xs={0} lg="max-content" styleConfig={{ direction: 'row', gap: '1rem', alignItems: 'center' }}>
           <TelephoneButton label />
+          <LanguageChanger />
         </Container>
 
         <Container

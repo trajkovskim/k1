@@ -11,6 +11,7 @@ type StyledCardProps = {
 const StyledCard = styled(AntdCard)<StyledCardProps>`
   background: ${(props) => props.transparent && 'transparent'};
   box-shadow: ${(props) => !props.shadow && 'none !important'};
+  overflow: hidden;
 `;
 
 type Props = React.ComponentProps<typeof AntdCard> &

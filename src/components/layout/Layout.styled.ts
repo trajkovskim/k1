@@ -8,6 +8,8 @@ export const StyledHeader = styled(Layout.Header)`
 `;
 
 export const StyledNav = styled(Menu)`
+  user-select: none;
+
   ${(props) => createPropeties(props.theme.layout.nav)};
 `;
 
@@ -16,6 +18,8 @@ export const StyledContent = styled(Layout.Content)`
 `;
 
 export const StyledFooter = styled(Layout.Footer)`
+  user-select: none;
+
   ${(props) => createPropeties(props.theme.layout.footer)};
 `;
 

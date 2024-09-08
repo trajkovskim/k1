@@ -1,14 +1,13 @@
+import { FontSize } from 'components/common/typography';
 import React from 'react';
 import styled from 'styled-components';
-
-type Size = string;
 
 type IconWrapperProps = {
   width?: string;
   height?: string;
   badge?: string;
   disabled?: boolean;
-  size?: Size;
+  size?: FontSize;
 };
 
 const IconWrapper = styled.span<IconWrapperProps>`
@@ -27,6 +26,7 @@ const IconWrapper = styled.span<IconWrapperProps>`
 
     height: ${(props) => props.height ?? '100%'};
 
+    width: ${(props) => props.size && props.theme.fontSize[props.size]};
     width: ${(props) => !props.size && (props.width ? props.width : '100%')};
   }
 
@@ -37,6 +37,7 @@ const IconWrapper = styled.span<IconWrapperProps>`
 
     height: ${(props) => props.height ?? '100%'};
 
+    width: ${(props) => props.size && props.theme.fontSize[props.size]};
     width: ${(props) => !props.size && (props.width ? props.width : '100%')};
   }
 `;

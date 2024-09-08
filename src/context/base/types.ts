@@ -2,6 +2,7 @@ import { Action } from 'context/types';
 
 export enum Language {
   EN = 'en',
+  MK = 'mk',
 }
 
 export type BaseState = {

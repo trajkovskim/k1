@@ -1,6 +1,6 @@
 import TemplateApp from 'TemplateApp';
 import { AppLayout } from 'components/layout';
-import { Home, Result404, Shop } from 'pages';
+import { DoTheChange, FitMarathon, Home, Result404, Shop } from 'pages';
 import React from 'react';
 import { Route } from 'react-router-dom';
 
@@ -10,6 +10,9 @@ export enum Routes {
   SHOP = '/shop',
   SHOP_VIEW_DETAILS = '/shop/:id',
   ANY_OTHER = '*',
+  PROJECTS = '/projects',
+  DO_THE_CHANGE = '/projects/do-the-change',
+  FIT_MARATHON = '/projects/fit-marathon',
   NOT_FOUND = '/not-found',
 }
 
@@ -31,6 +34,12 @@ const routes: RouteOptions = {
           },
           [Routes.SHOP]: {
             element: <Shop />,
+          },
+          [Routes.DO_THE_CHANGE]: {
+            element: <DoTheChange />,
+          },
+          [Routes.FIT_MARATHON]: {
+            element: <FitMarathon />,
           },
           [Routes.ANY_OTHER]: {
             element: <Result404 />,

@@ -33,9 +33,9 @@ const MobileNavigation: React.FC = () => {
   return (
     <>
       <StyledSidebar placement="left" open={open} onClose={() => setOpen(false)} title={<LogoImage />}>
-        <LanguageChanger />
+        <LanguageChanger label />
         <Divider />
-        <NavigationMenu mode="vertical" />
+        <NavigationMenu mode="inline" onNavigate={() => setOpen(false)} />
         <Divider />
         <Container
           styleConfig={{

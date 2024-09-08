@@ -1,5 +1,5 @@
 import Logo from 'assets/logo.png';
-import { Image, Text } from 'components/common';
+import { Image } from 'components/common';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Routes } from 'routes';
@@ -7,18 +7,12 @@ import { Routes } from 'routes';
 const LogoImage: React.FC = () => {
   const navigate = useNavigate();
 
-  // return (
-  //   <Text size="md" nowrap>
-  //     Logo
-  //   </Text>
-  // );
-
   return (
     <Image
       onClick={() => navigate(Routes.INDEX)}
       src={Logo}
       alt="logo"
-      width="170px"
+      width="230px"
       height="100%"
       objectFit="contain"
     />

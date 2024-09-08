@@ -1,34 +1,51 @@
+import { RightCircleOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import BusinessOpportunity from 'assets/business oppurtunity.jpg';
-import DoTheChange from 'assets/do-the-change.png';
-import FitMarathon from 'assets/fit-marathon.jpg';
+import DoTheChangeLogo from 'assets/do-the-change-logo-white.png';
+import FitMarathonLogo from 'assets/fit-marathon-logo.png';
 import GirlHandHerbalifeShake from 'assets/girl-hand-herbalife-shake.jpg';
 import HerbalifeShakes from 'assets/herbalife-shakes.png';
 import NoImageAvailable from 'assets/noimageavailable.jpg';
+import Basic10DaysImage from 'assets/programs/basic-10-days.png';
+import Detox10DaysImage from 'assets/programs/detox-10-days.png';
+import Sport10DaysImage from 'assets/programs/sport-10-days.png';
 import { ShopProductCard } from 'components/card';
-import { Button, CardMeta, Carousel, Container, HorizontalList, Image, Text, Title } from 'components/common';
-import { DarkBackgroundContainer } from 'components/layout';
+import {
+  Button,
+  CardMeta,
+  Carousel,
+  Container,
+  HorizontalList,
+  Image,
+  ServiceCard,
+  Text,
+  Title,
+} from 'components/common';
+import { DarkBackgroundContainer, WhiteBackgroundContainer } from 'components/layout';
 import ImageContainer from 'components/layout/ImageContainer';
 import { useTranslation } from 'hooks';
-import { PAGE_MAX_WIDTH, products } from 'pages/constants';
+import { PAGE_MAX_WIDTH } from 'pages/constants';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Routes } from 'routes';
+import { searchProducts } from 'services';
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+  const products = searchProducts();
   const t = useTranslation('home');
 
   const titleGap = '2rem';
 
   const createImageContentContainer = (imageSrc: string, content: React.ReactNode) => (
-    <div>
-      <Container styleConfig={{ wrap: true, direction: 'row', gap: '3rem' }}>
-        <Container xs={12} lg={6} lgStyle={{ padding: 'lg' }}>
-          <Image shadow src={imageSrc} objectFit="scale-down" objectPosition="center" width="100%" />
-        </Container>
-        <Container xs={12} lg={6} styleConfig={{ padding: 'lg' }}>
-          {content}
-        </Container>
+    <Container xs={PAGE_MAX_WIDTH} styleConfig={{ centered: 'horizontal', wrap: true, direction: 'row', gap: '3rem' }}>
+      <Container xs={12} lg={6} lgStyle={{ padding: 'lg', alignItems: 'center' }}>
+        <Image shadow src={imageSrc} objectFit="scale-down" objectPosition="center" width="100%" height="430px" />
       </Container>
-    </div>
+      <Container xs={12} lg={6} styleConfig={{ padding: 'lg', alignItems: 'start', gap: '2rem' }}>
+        {content}
+      </Container>
+    </Container>
   );
 
   /* Carousel */
@@ -86,27 +103,16 @@ const Home: React.FC = () => {
       </Container>
 
       {/* Section 1 */}
-      {/* <Container xs={PAGE_MAX_WIDTH} styleConfig={{ wrap: true, direction: 'row', gap: '2rem', centered: true }}>
-        <Container xs={12} styleConfig={{ padding: 'md' }}>
-          <Tabs
-            items={[
-              { key: '1', label: 'Label 1' },
-              { key: '2', label: 'Label 2' },
-            ]}
-          />
-        </Container>
-        <Container xs={12} lg={6} styleConfig={{ padding: 'md' }}>
-          <Title size="lg" gap={titleGap} title={t('section1.title')} description={t('section1.description')} />
-        </Container>
-        <Container xs={12} lg={6} lgStyle={{ padding: 'md' }}>
-          <Image shadow src={NoImageAvailable} objectFit="cover" objectPosition="center" height="500px" />
-        </Container>
-      </Container> */}
-
-      {/* Section 2 */}
       <Container xs={`calc(100% - (100% - ${PAGE_MAX_WIDTH}) / 2)`} styleConfig={{ alignSelf: 'end', gap: '2rem' }}>
-        <Container styleConfig={{ padding: 'md' }}>
-          <Title title={t('section2.title')} size="lg" gap={titleGap} />
+        <Container styleConfig={{ gap: '10px', direction: 'row', alignItems: 'center' }}>
+          <Title title={t('section1.title')} size="lg" gap={titleGap} />
+          <Button
+            type="link"
+            size="lg"
+            icon={<RightCircleOutlined />}
+            iconPosition="end"
+            onClick={() => navigate(Routes.SHOP)}
+          />
         </Container>
         <HorizontalList gap="15px" chunkSize={{ xs: 12, sm: 6, lg: 4, xl: 3 }} circular arrows>
           {products.map((product) => (
@@ -117,38 +123,96 @@ const Home: React.FC = () => {
               images={[product.image]}
               amount={product.price.toString()}
               imageHeight="370px"
+              onView={() => navigate(Routes.SHOP_VIEW_DETAILS.replace(':id', product.id.toString()))}
             />
           ))}
         </HorizontalList>
       </Container>
 
+      {/* Section 2 */}
+      <Container xs={PAGE_MAX_WIDTH} styleConfig={{ centered: true, gap: '2rem', padding: 'md' }}>
+        <Container styleConfig={{ gap: '10px', direction: 'row', alignItems: 'center' }}>
+          <Title title={t('section2.title')} size="lg" gap={titleGap} />
+          <Button
+            type="link"
+            size="lg"
+            icon={<RightCircleOutlined />}
+            iconPosition="end"
+            onClick={() => navigate(Routes.SHOP)}
+          />
+        </Container>
+        <Container styleConfig={{ gap: '60px', direction: 'row', wrap: true, alignItems: 'center' }}>
+          <Container xs={12} lg={4}>
+            <ServiceCard
+              title={t('section2.card.0.title')}
+              image={Basic10DaysImage}
+              description="Basic"
+              imageHeight="400px"
+              onClick={() => navigate(Routes.SHOP_VIEW_DETAILS.replace(':id', '0'))}
+            />
+          </Container>
+          <Container xs={12} lg={4}>
+            <ServiceCard
+              title={t('section2.card.1.title')}
+              image={Sport10DaysImage}
+              description="Sport"
+              imageHeight="400px"
+              onClick={() => navigate(Routes.SHOP_VIEW_DETAILS.replace(':id', '0'))}
+            />
+          </Container>
+          <Container xs={12} lg={4}>
+            <ServiceCard
+              title={t('section2.card.2.title')}
+              image={Detox10DaysImage}
+              description="Detox"
+              imageHeight="400px"
+              onClick={() => navigate(Routes.SHOP_VIEW_DETAILS.replace(':id', '0'))}
+            />
+          </Container>
+        </Container>
+      </Container>
+
       {/* Section 3 */}
-      <DarkBackgroundContainer>
-        <ImageContainer imageSrc={FitMarathon}>
-          <Container xs={PAGE_MAX_WIDTH} styleConfig={{ centered: true, padding: { top: 'xl', bottom: 'xl' } }}>
-            <Carousel dots arrows draggable autoplaySpeed={5000}>
-              {createImageContentContainer(
-                FitMarathon,
+      <Container>
+        <Carousel dots arrows draggable autoplaySpeed={5000}>
+          <WhiteBackgroundContainer
+            styleConfig={{ minHeight: '100%', padding: { left: 'md', right: 'md', top: 'xl', bottom: 'xl' } }}
+          >
+            {createImageContentContainer(
+              FitMarathonLogo,
+              <>
                 <Title
                   size="lg"
                   gap={titleGap}
                   title={t('section3.item.0.title')}
                   description={t('section3.item.0.description')}
                 />
-              )}
-              {createImageContentContainer(
-                DoTheChange,
+                <Button type="primary" size="lg" onClick={() => navigate(Routes.FIT_MARATHON)}>
+                  {t('section3.item.0.button')}
+                </Button>
+              </>
+            )}
+          </WhiteBackgroundContainer>
+          <DarkBackgroundContainer
+            styleConfig={{ minHeight: '100%', padding: { left: 'md', right: 'md', top: 'xl', bottom: 'xl' } }}
+          >
+            {createImageContentContainer(
+              DoTheChangeLogo,
+              <>
                 <Title
                   size="lg"
                   gap={titleGap}
                   title={t('section3.item.1.title')}
                   description={t('section3.item.1.description')}
                 />
-              )}
-            </Carousel>
-          </Container>
-        </ImageContainer>
-      </DarkBackgroundContainer>
+                <Button type="primary" size="lg" onClick={() => navigate(Routes.DO_THE_CHANGE)}>
+                  {t('section3.item.1.button')}
+                </Button>
+              </>
+            )}
+          </DarkBackgroundContainer>
+        </Carousel>
+      </Container>
 
       {/* Section 4 */}
       <Container
@@ -170,10 +234,10 @@ const Home: React.FC = () => {
             avatar={
               <Avatar src={NoImageAvailable} size="large" style={{ height: '128px', width: '128px', margin: 'auto' }} />
             }
-            title={<Text size="lg">Kostadinka Trajkovska</Text>}
+            title={<Text size="lg">{t('section4.card.meta.title')}</Text>}
             description={
               <Text size="md" type="secondary">
-                Herbalife | Независен член
+                {t('section4.card.meta.description')}
               </Text>
             }
           />
@@ -181,7 +245,7 @@ const Home: React.FC = () => {
       </Container>
 
       {/* Section 5 */}
-      <DarkBackgroundContainer>
+      <WhiteBackgroundContainer>
         <Container
           xs={PAGE_MAX_WIDTH}
           styleConfig={{
@@ -199,7 +263,7 @@ const Home: React.FC = () => {
             <Image shadow src={BusinessOpportunity} objectFit="cover" objectPosition="center" height="500px" />
           </Container>
         </Container>
-      </DarkBackgroundContainer>
+      </WhiteBackgroundContainer>
     </Container>
   );
 };

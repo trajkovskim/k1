@@ -1,4 +1,5 @@
-import { FacebookFilled, InstagramFilled } from '@ant-design/icons';
+import { FacebookFilled, InstagramFilled, LinkedinFilled } from '@ant-design/icons';
+import useTranslation from 'hooks/useTranslation';
 import React from 'react';
 
 enum SocialMedia {
@@ -9,16 +10,23 @@ enum SocialMedia {
 }
 
 const useSocialMedias = () => {
+  const t = useTranslation('links');
+
   return [
     {
       type: SocialMedia.FACEBOOK,
       icon: React.createElement(FacebookFilled),
-      href: '#',
+      href: t('facebook'),
     },
     {
       type: SocialMedia.INSTAGRAM,
       icon: React.createElement(InstagramFilled),
-      href: '#',
+      href: t('instagram'),
+    },
+    {
+      type: SocialMedia.LINKEDIN,
+      icon: React.createElement(LinkedinFilled),
+      href: t('linkedin'),
     },
   ];
 };

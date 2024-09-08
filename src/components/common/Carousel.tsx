@@ -29,15 +29,18 @@ const OnCarouselContainer = styled.div`
 
 type StyledCarouselProps = {
   gap?: React.CSSProperties['gap'];
+  elementHeight?: string;
 };
 
 const StyledCarousel = styled(CarouselAntd)<StyledCarouselProps>`
   & > .slick-list > * > .slick-slide {
     padding-left: ${(props) => `calc(${props.gap} / 2)`};
     padding-right: ${(props) => `calc(${props.gap} / 2)`};
-  }
 
-  & > .slick-dots button::after {
+    &,
+    > * {
+      height: ${(props) => props.elementHeight};
+    }
   }
 `;
 
@@ -49,16 +52,18 @@ type Props = React.ComponentProps<typeof CarouselAntd> &
     onImageContainer?: React.ReactNode;
   };
 
-const Carousel = React.forwardRef<CarouselRef, Props>(({ ms = 5000, onImageContainer, ...props }, ref) => {
-  return (
-    <Container styleConfig={{ relative: true }}>
-      {onImageContainer && <OnCarouselContainer>{onImageContainer}</OnCarouselContainer>}
-      <StyledCarousel ref={ref} autoplay autoplaySpeed={ms} {...props}>
-        {props.children}
-      </StyledCarousel>
-    </Container>
-  );
-});
+const Carousel = React.forwardRef<CarouselRef, Props>(
+  ({ ms = 5000, onImageContainer, elementHeight, ...props }, ref) => {
+    return (
+      <Container styleConfig={{ relative: true }}>
+        {onImageContainer && <OnCarouselContainer>{onImageContainer}</OnCarouselContainer>}
+        <StyledCarousel ref={ref} autoplay autoplaySpeed={ms} elementHeight={elementHeight} {...props}>
+          {props.children}
+        </StyledCarousel>
+      </Container>
+    );
+  }
+);
 
 Carousel.displayName = 'Carousel';
 

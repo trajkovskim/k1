@@ -1,11 +1,12 @@
 import { useCallback } from 'react';
 import { Language } from 'context/base/types';
 import { useLanguage } from 'hooks';
-// import messages_mk from 'assets/messages_mk.json';
+import messages_mk from 'assets/messages_mk.json';
 import messages_en from 'assets/messages_en.json';
 
 const messages: Record<Language, Record<string, unknown>> = {
   [Language.EN]: messages_en,
+  [Language.MK]: messages_mk,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

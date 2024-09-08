@@ -30,6 +30,23 @@ const useNavigationOptions = () => {
       active: location.pathname === Routes.SHOP,
       icon: React.createElement(ShoppingOutlined),
     },
+    [Routes.PROJECTS]: {
+      label: t('projects'),
+      active: location.pathname === Routes.DO_THE_CHANGE || location.pathname === Routes.FIT_MARATHON,
+      icon: React.createElement(ShoppingOutlined),
+      options: {
+        [Routes.DO_THE_CHANGE]: {
+          label: t('doTheChange'),
+          active: location.pathname === Routes.DO_THE_CHANGE,
+          navigate: () => navigate(Routes.DO_THE_CHANGE),
+        },
+        [Routes.FIT_MARATHON]: {
+          label: t('fitMarathon'),
+          active: location.pathname === Routes.FIT_MARATHON,
+          navigate: () => navigate(Routes.FIT_MARATHON),
+        },
+      },
+    },
   };
 
   return options;
