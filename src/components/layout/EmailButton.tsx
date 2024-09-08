@@ -13,7 +13,7 @@ const EmailButton: React.FC<Props> = (props) => {
 
   const email = t('email');
   return (
-    <Button maxContent themeType="link" size="lg" icon={<MailOutlined />} onClick={() => mailTo(email)} {...props}>
+    <Button type="link" size="lg" icon={<MailOutlined />} onClick={() => mailTo(email)} {...props}>
       {props.label && email}
     </Button>
   );

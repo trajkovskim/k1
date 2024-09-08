@@ -42,11 +42,7 @@ const Result404: React.FC = () => {
         status="404"
         title={t('title')}
         subTitle={t('subtitle')}
-        extra={
-          <Button maxContent onClick={() => navigate(Routes.INDEX)}>
-            {t('backHomeButton')}
-          </Button>
-        }
+        extra={<Button onClick={() => navigate(Routes.INDEX)}>{t('backHomeButton')}</Button>}
       />
     </Container>
   );
