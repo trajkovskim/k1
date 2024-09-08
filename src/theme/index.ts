@@ -31,9 +31,9 @@ export const baseTokenConfig: ThemeConfig = {
 
 export const secondaryTokenConfig: ThemeConfig = {
   token: {
-    colorPrimary: '#fff',
-    colorBgBase: '#232323',
-    colorText: '#fff',
+    colorPrimary: '#000',
+    colorBgBase: '#eee',
+    colorText: '#000',
     colorLink: '#42a046',
     fontFamily: 'Noto Sans, sans-serif',
     fontSize: remToPx(1),

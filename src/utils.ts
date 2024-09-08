@@ -7,7 +7,7 @@ export const goto = (url: string) => {
 };
 
 export const call = (tel: string) => {
-  window.open(`tel:${tel}`);
+  window.open(`tel:${tel.replaceAll(/[^0-9]/g, '')}`);
 };
 
 export const mailTo = (emailTo: string, otherParameters?: Record<string, string>) => {
@@ -32,7 +32,7 @@ export const formatNumber = (num: string | number, separator = ',') => {
   const numAsString = typeof num === 'number' ? num.toString() : num;
 
   const pointPosition = numAsString.indexOf('.');
-  const length = numAsString.length - pointPosition === -1 ? 0 : pointPosition;
+  const length = numAsString.length - (pointPosition === -1 ? 0 : pointPosition);
 
   if (length <= 3) {
     return numAsString;
@@ -53,7 +53,7 @@ export const formatNumber = (num: string | number, separator = ',') => {
   return result.substring(0, result.length - 1);
 };
 
-export const formatMoney = (num: string | number, separator = ',') => '$' + formatNumber(num, separator);
+export const formatMoney = (num: string | number, separator = ',') => formatNumber(num, separator) + ' денари';
 
 export const getElementHeight = (el: HTMLElement) => {
   const list = [

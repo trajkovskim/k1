@@ -1,7 +1,6 @@
 import { HomeOutlined } from '@ant-design/icons';
-import { Button } from 'components/common/form';
 import Container from 'components/common/Container';
-import { Text } from 'components/common/typography';
+import { Button } from 'components/common/form';
 import { useTranslation } from 'hooks';
 import React from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -38,12 +37,13 @@ const Breadcrumb: React.FC<Props> = (props) => {
   }
 
   return (
-    <Container styleConfig={{ direction: 'row', gap: '0.3rem', alignItems: 'center' }}>
+    <Container styleConfig={{ direction: 'row', gap: '0.3rem' }}>
       {paths.map((path, index) => (
         <>
           {index !== paths.length - 1 ? (
             <Button
               key={path.pathname}
+              type="link"
               size="md"
               icon={path.icon}
               onClick={() => navigate({ pathname: path.pathname })}
@@ -51,10 +51,16 @@ const Breadcrumb: React.FC<Props> = (props) => {
               {path.label}
             </Button>
           ) : (
-            <Text>{path.label}</Text>
+            <Button disabled type="link" size="md">
+              {path.label}
+            </Button>
           )}
 
-          {index !== paths.length - 1 && <Text>{'>'}</Text>}
+          {index !== paths.length - 1 && (
+            <Button disabled type="link" size="md">
+              {'>'}
+            </Button>
+          )}
         </>
       ))}
     </Container>

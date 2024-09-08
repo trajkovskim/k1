@@ -2,6 +2,7 @@ import { Container, Line } from 'components/common';
 import { StyledHeader } from 'components/layout/Layout.styled';
 import LogoImage from 'components/layout/LogoImage';
 import NavigationMenu from 'components/layout/NavigationMenu';
+import TelephoneButton from 'components/layout/TelephoneButton';
 import MobileNavigation from 'components/layout/XsNavigation';
 import React from 'react';
 
@@ -19,7 +20,7 @@ const Header: React.FC = () => {
         lgStyle={{
           justifyContent: 'start',
           gap: '2rem',
-          padding: { left: 'lg' },
+          padding: { left: 'lg', right: 'lg' },
         }}
       >
         <Container xs={1} lg={0} styleConfig={{ direction: 'row', gap: '0.5rem' }} />
@@ -29,6 +30,9 @@ const Header: React.FC = () => {
         </Container>
         <Container xs={0} lg={12}>
           <NavigationMenu mode="horizontal" />
+        </Container>
+        <Container xs={0} lg="max-content">
+          <TelephoneButton label />
         </Container>
 
         <Container

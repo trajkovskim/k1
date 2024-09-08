@@ -7,11 +7,11 @@ import { Routes } from 'routes';
 const LogoImage: React.FC = () => {
   const navigate = useNavigate();
 
-  return (
-    <Text size="md" nowrap>
-      Logo
-    </Text>
-  );
+  // return (
+  //   <Text size="md" nowrap>
+  //     Logo
+  //   </Text>
+  // );
 
   return (
     <Image

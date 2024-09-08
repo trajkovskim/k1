@@ -6,29 +6,30 @@ type StyledImageContainerProps = {
 };
 
 const StyledImageContainer = styled(Container)<StyledImageContainerProps>`
-  background-image: ${(props) => props.imageSrc && `url(${props.imageSrc})`};
-  background-size: cover;
-  background-position: center center;
-  transition: 200ms all;
   position: relative;
   color: #fff;
-
+  transition: 200ms all;
   user-select: none;
+  overflow: hidden;
 
   &::before {
     content: '';
-    background-color: #232323;
+    background-image: ${(props) => props.imageSrc && `url(${props.imageSrc})`};
+    background-size: cover;
+    background-position: center center;
+    background-color: ${(props) => (props.imageSrc ? '#232323' : '#fff')};
+    filter: blur(3px) brightness(70%);
+
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity: 0.4;
     top: 0;
     left: 0;
   }
 
   & > * {
     position: relative;
-    z-index: 1;
+    z-index: 2;
   }
 `;
 
