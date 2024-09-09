@@ -21,7 +21,8 @@ const StyledImage = styled(ImageAntd)<StyledImageProps & { pointer?: boolean }>`
 
   user-select: none;
   max-width: ${(props) => props.width};
-  height: ${(props) => props.height};
+  height: 100%;
+  max-height: ${(props) => props.height};
 
   width: 100%;
 

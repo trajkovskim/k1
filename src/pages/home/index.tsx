@@ -21,11 +21,11 @@ import {
   Text,
   Title,
 } from 'components/common';
-import { DarkBackgroundContainer, WhiteBackgroundContainer } from 'components/layout';
+import { ColoredContainer } from 'components/layout';
 import ImageContainer from 'components/layout/ImageContainer';
 import { useTranslation } from 'hooks';
 import { PAGE_MAX_WIDTH } from 'pages/constants';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Routes } from 'routes';
 import { searchProducts } from 'services';
@@ -34,15 +34,29 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   const products = searchProducts();
   const t = useTranslation('home');
+  const [projectsSlide, setProjectsSlide] = useState(0);
 
-  const titleGap = '2rem';
+  const titleGap = '0rem';
 
   const createImageContentContainer = (imageSrc: string, content: React.ReactNode) => (
-    <Container xs={PAGE_MAX_WIDTH} styleConfig={{ centered: 'horizontal', wrap: true, direction: 'row', gap: '3rem' }}>
-      <Container xs={12} lg={6} lgStyle={{ padding: 'lg', alignItems: 'center' }}>
-        <Image shadow src={imageSrc} objectFit="scale-down" objectPosition="center" width="100%" height="430px" />
+    <Container
+      styleConfig={{
+        wrap: true,
+        direction: 'row',
+        padding: 'lg',
+        alignItems: 'center',
+        textAlign: 'center',
+        userSelect: 'none',
+      }}
+      lgStyle={{
+        gap: '3rem',
+        textAlign: 'start',
+      }}
+    >
+      <Container xs={12} lg={6}>
+        <Image shadow src={imageSrc} objectFit="scale-down" objectPosition="center" width="100%" height="300px" />
       </Container>
-      <Container xs={12} lg={6} styleConfig={{ padding: 'lg', alignItems: 'start', gap: '2rem' }}>
+      <Container xs={12} lg={6} styleConfig={{ gap: '2rem', alignItems: 'center' }} lgStyle={{ alignItems: 'start' }}>
         {content}
       </Container>
     </Container>
@@ -52,55 +66,61 @@ const Home: React.FC = () => {
   return (
     <Container styleConfig={{ gap: '4rem' }} lgStyle={{ gap: '9rem' }}>
       <Container>
-        <Carousel arrows draggable>
-          <div>
-            <ImageContainer
-              imageSrc={HerbalifeShakes}
-              styleConfig={{
-                padding: 'lg',
-                textAlign: 'center',
-                alignItems: 'center',
-                justifyContent: 'center',
-                minHeight: '600px',
-                gap: '2rem',
-              }}
-              lgStyle={{ padding: 'xl', textAlign: 'start', alignItems: 'start', justifyContent: 'start' }}
-            >
-              <Title
-                title={t('carousel.items.0.title')}
-                description={t('carousel.items.0.description')}
-                size="2xl"
-                gap={titleGap}
-              />
-              <Button type="primary" size="xl">
-                {t('carousel.items.0.button')}
-              </Button>
-            </ImageContainer>
-          </div>
-          <div>
-            <ImageContainer
-              imageSrc={GirlHandHerbalifeShake}
-              styleConfig={{
-                padding: 'lg',
-                textAlign: 'center',
-                alignItems: 'center',
-                justifyContent: 'center',
-                minHeight: '600px',
-                gap: '2rem',
-              }}
-              lgStyle={{ padding: 'xl', textAlign: 'start', alignItems: 'start', justifyContent: 'start' }}
-            >
-              <Title
-                title={t('carousel.items.1.title')}
-                description={t('carousel.items.1.description')}
-                size="2xl"
-                gap={titleGap}
-              />
-              <Button type="primary" size="xl">
-                {t('carousel.items.1.button')}
-              </Button>
-            </ImageContainer>
-          </div>
+        <Carousel arrows draggable flexChildren>
+          <ImageContainer
+            imageSrc={HerbalifeShakes}
+            styleConfig={{
+              padding: 'lg',
+              textAlign: 'center',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '2rem',
+            }}
+            lgStyle={{
+              minHeight: '500px',
+              padding: 'xl',
+              textAlign: 'start',
+              alignItems: 'start',
+              justifyContent: 'start',
+            }}
+          >
+            <Title
+              title={t('carousel.items.0.title')}
+              description={t('carousel.items.0.description')}
+              size="2xl"
+              gap={titleGap}
+            />
+            <Button type="primary" size="xl">
+              {t('carousel.items.0.button')}
+            </Button>
+          </ImageContainer>
+          <ImageContainer
+            imageSrc={GirlHandHerbalifeShake}
+            styleConfig={{
+              padding: 'lg',
+              textAlign: 'center',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '2rem',
+            }}
+            lgStyle={{
+              minHeight: '500px',
+              padding: 'xl',
+              textAlign: 'start',
+              alignItems: 'start',
+              justifyContent: 'start',
+            }}
+          >
+            <Title
+              title={t('carousel.items.1.title')}
+              description={t('carousel.items.1.description')}
+              size="2xl"
+              gap={titleGap}
+            />
+            <Button type="primary" size="xl">
+              {t('carousel.items.1.button')}
+            </Button>
+          </ImageContainer>
         </Carousel>
       </Container>
 
@@ -118,7 +138,7 @@ const Home: React.FC = () => {
             onClick={() => navigate(Routes.SHOP)}
           />
         </Container>
-        <HorizontalList gap="15px" chunkSize={{ xs: 12, sm: 6, lg: 4, xl: 3 }} circular arrows>
+        <HorizontalList gap="15px" chunkSize={{ xs: 12, sm: 6, lg: 4, xl: 3.5 }} circular arrows>
           {products.map((product) => (
             <ShopProductCard
               key={product.id}
@@ -153,7 +173,7 @@ const Home: React.FC = () => {
               title={t('section2.card.0.title')}
               description={t('section2.card.0.description')}
               image={Basic10DaysImage}
-              imageHeight="400px"
+              imageHeight="300px"
               onClick={() => navigate(Routes.SHOP_VIEW_DETAILS.replace(':id', '0'))}
             />
           </Container>
@@ -162,7 +182,7 @@ const Home: React.FC = () => {
               title={t('section2.card.1.title')}
               description={t('section2.card.1.description')}
               image={Sport10DaysImage}
-              imageHeight="400px"
+              imageHeight="300px"
               onClick={() => navigate(Routes.SHOP_VIEW_DETAILS.replace(':id', '0'))}
             />
           </Container>
@@ -171,7 +191,7 @@ const Home: React.FC = () => {
               title={t('section2.card.2.title')}
               description={t('section2.card.2.description')}
               image={Detox10DaysImage}
-              imageHeight="400px"
+              imageHeight="300px"
               onClick={() => navigate(Routes.SHOP_VIEW_DETAILS.replace(':id', '0'))}
             />
           </Container>
@@ -179,11 +199,13 @@ const Home: React.FC = () => {
       </Container>
 
       {/* Section 3 */}
-      <Container>
-        <Carousel dots arrows draggable autoplaySpeed={5000}>
-          <WhiteBackgroundContainer
-            styleConfig={{ minHeight: '100%', padding: { left: 'md', right: 'md', top: 'xl', bottom: 'xl' } }}
-          >
+      <ColoredContainer type={!projectsSlide ? 'primary' : 'secondary'}>
+        <Container
+          xs={PAGE_MAX_WIDTH}
+          styleConfig={{ centered: true }}
+          lgStyle={{ padding: { bottom: 'xl', top: 'xl', right: 'md', left: 'md' } }}
+        >
+          <Carousel flexChildren dots arrows draggable beforeChange={(_, next) => setProjectsSlide(next)}>
             {createImageContentContainer(
               FitMarathonLogo,
               <>
@@ -198,10 +220,6 @@ const Home: React.FC = () => {
                 </Button>
               </>
             )}
-          </WhiteBackgroundContainer>
-          <DarkBackgroundContainer
-            styleConfig={{ minHeight: '100%', padding: { left: 'md', right: 'md', top: 'xl', bottom: 'xl' } }}
-          >
             {createImageContentContainer(
               DoTheChangeLogo,
               <>
@@ -216,9 +234,9 @@ const Home: React.FC = () => {
                 </Button>
               </>
             )}
-          </DarkBackgroundContainer>
-        </Carousel>
-      </Container>
+          </Carousel>
+        </Container>
+      </ColoredContainer>
 
       {/* Section 4 */}
       <Container
@@ -235,14 +253,13 @@ const Home: React.FC = () => {
           <Title size="lg" gap={titleGap} title={t('section4.title')} description={t('section4.description')} />
           <CardMeta
             gap="15px"
-            row
             centeredContent
             avatar={
               <Avatar src={NoImageAvailable} size="large" style={{ height: '128px', width: '128px', margin: 'auto' }} />
             }
             title={<Text size="lg">{t('section4.card.meta.title')}</Text>}
             description={
-              <Text size="md" type="secondary">
+              <Text size="md" type="secondary" ellipsis>
                 {t('section4.card.meta.description')}
               </Text>
             }
@@ -251,7 +268,7 @@ const Home: React.FC = () => {
       </Container>
 
       {/* Section 5 */}
-      <WhiteBackgroundContainer>
+      <ColoredContainer>
         <Container
           xs={PAGE_MAX_WIDTH}
           styleConfig={{
@@ -269,7 +286,7 @@ const Home: React.FC = () => {
             <Image shadow src={BusinessOpportunity} objectFit="cover" objectPosition="center" height="500px" />
           </Container>
         </Container>
-      </WhiteBackgroundContainer>
+      </ColoredContainer>
     </Container>
   );
 };

@@ -1,7 +1,7 @@
 import { Layout, Menu } from 'antd';
 import { Container } from 'components/common';
 import { createPropeties } from 'components/utils';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledHeader = styled(Layout.Header)`
   ${(props) => createPropeties(props.theme.layout.header)};
@@ -40,4 +40,48 @@ export const DarkBackgroundContainer = styled(Container)`
   .slick-dots li button {
     background: ${(props) => props.theme.antd.secondaryToken.colorText};
   }
+`;
+
+export type TogglableContainerProps = {
+  type?: 'primary' | 'secondary';
+};
+
+export const ColoredContainer = styled(Container)<TogglableContainerProps>`
+  transition: 200ms;
+  ${(props) => {
+    switch (props.type ?? 'primary') {
+      case 'primary':
+        return css`
+          background-color: ${(props) => props.theme.antd.primaryToken.colorBgBase};
+          color: ${(props) => props.theme.antd.primaryToken.colorText};
+
+          .slick-arrow::after {
+            color: ${(props) => props.theme.antd.primaryToken.colorText};
+          }
+
+          .slick-dots li.slick-active button,
+          .slick-dots li button {
+            background: ${(props) => props.theme.antd.primaryToken.colorText};
+          }
+
+          .ant-btn-primary {
+            color: ${props.theme.antd.primaryToken.Button?.primaryColor};
+          }
+        `;
+      case 'secondary':
+        return css`
+          background-color: ${(props) => props.theme.antd.secondaryToken.colorBgBase};
+          color: ${(props) => props.theme.antd.secondaryToken.colorText};
+
+          .slick-arrow::after {
+            color: ${(props) => props.theme.antd.secondaryToken.colorText};
+          }
+
+          .slick-dots li.slick-active button,
+          .slick-dots li button {
+            background: ${(props) => props.theme.antd.secondaryToken.colorText};
+          }
+        `;
+    }
+  }}
 `;

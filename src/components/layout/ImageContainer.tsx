@@ -11,6 +11,8 @@ const StyledImageContainer = styled(Container)<StyledImageContainerProps>`
   transition: 200ms all;
   user-select: none;
   overflow: hidden;
+  /* height: 100%; */
+  /* display: flex !important; */
 
   &::before {
     content: '';

@@ -19,6 +19,9 @@ export const baseTokenConfig: ThemeConfig = {
       headerBg: '#fff',
       footerBg: '#232323',
     },
+    Button: {
+      colorPrimaryText: '#000',
+    },
   },
   token: {
     colorPrimary: '#266431',

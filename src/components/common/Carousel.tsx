@@ -2,7 +2,7 @@ import { Carousel as CarouselAntd } from 'antd';
 import { CarouselRef as CarouselRefAntd } from 'antd/es/carousel';
 import Container from 'components/common/Container';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const OnCarouselContainer = styled.div`
   position: absolute;
@@ -29,41 +29,61 @@ const OnCarouselContainer = styled.div`
 
 type StyledCarouselProps = {
   gap?: React.CSSProperties['gap'];
-  elementHeight?: string;
+  flexChildren?: boolean;
 };
 
 const StyledCarousel = styled(CarouselAntd)<StyledCarouselProps>`
-  & > .slick-list > * > .slick-slide {
-    padding-left: ${(props) => `calc(${props.gap} / 2)`};
-    padding-right: ${(props) => `calc(${props.gap} / 2)`};
+  & > .slick-list > .slick-track > .slick-slide {
+    padding-left: ${(props) => props.gap && `calc(${props.gap} / 2)`};
+    padding-right: ${(props) => props.gap && `calc(${props.gap} / 2)`};
 
-    &,
-    > * {
-      height: ${(props) => props.elementHeight};
+    > div > * {
+      display: ${(props) => props.flexChildren && 'flex !important'};
     }
   }
+
+  ${(props) =>
+    !props.adaptiveHeight &&
+    props.dotPosition !== 'left' &&
+    props.dotPosition !== 'right' &&
+    css`
+      & > .slick-list {
+        height: inherit;
+        > .slick-track {
+          display: flex;
+          align-items: stretch;
+          justify-content: stretch;
+
+          > .slick-slide {
+            height: auto;
+
+            > div,
+            > div > * {
+              height: 100%;
+            }
+          }
+        }
+      }
+    `}
 `;
 
 export type CarouselRef = CarouselRefAntd;
 
 type Props = React.ComponentProps<typeof CarouselAntd> &
   StyledCarouselProps & {
-    ms?: number;
     onImageContainer?: React.ReactNode;
   };
 
-const Carousel = React.forwardRef<CarouselRef, Props>(
-  ({ ms = 5000, onImageContainer, elementHeight, ...props }, ref) => {
-    return (
-      <Container styleConfig={{ relative: true }}>
-        {onImageContainer && <OnCarouselContainer>{onImageContainer}</OnCarouselContainer>}
-        <StyledCarousel ref={ref} autoplay autoplaySpeed={ms} elementHeight={elementHeight} {...props}>
-          {props.children}
-        </StyledCarousel>
-      </Container>
-    );
-  }
-);
+const Carousel = React.forwardRef<CarouselRef, Props>(({ autoplaySpeed = 5000, onImageContainer, ...props }, ref) => {
+  return (
+    <Container styleConfig={{ relative: true }}>
+      {onImageContainer && <OnCarouselContainer>{onImageContainer}</OnCarouselContainer>}
+      <StyledCarousel ref={ref} autoplay autoplaySpeed={autoplaySpeed} {...props}>
+        {props.children}
+      </StyledCarousel>
+    </Container>
+  );
+});
 
 Carousel.displayName = 'Carousel';
 
