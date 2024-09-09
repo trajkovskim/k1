@@ -8,7 +8,14 @@ const ProductCard: React.FC<ProductProps> = (props) => {
     <Card
       className={props.className}
       hoverable
-      cover={<ProductCardImages id={props.id} images={props.images} height="450px" />}
+      cover={
+        <ProductCardImages
+          images={props.images ?? []}
+          height={props.imageHeight}
+          width={props.imageWidth}
+          objectFit="contain"
+        />
+      }
       onClick={props.onView}
     />
   );
