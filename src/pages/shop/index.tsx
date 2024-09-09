@@ -1,13 +1,15 @@
 import { ShopProductCard } from 'components/card';
-import { Container, Tabs, Text, Title } from 'components/common';
+import { BoxAnimation, Container, Tabs, Text, Title } from 'components/common';
 import { WhiteBackgroundContainer } from 'components/layout';
 import PageHeader from 'components/PageHeader';
-import { useTranslation } from 'hooks';
+import { useLanguage, useTranslation } from 'hooks';
 import { PAGE_MAX_WIDTH } from 'pages/constants';
 import SortDropdown from 'pages/shop/SortDropdown';
 import { ProductTypeFilterExtender } from 'pages/shop/types';
 import { convertProductTypesToFilterOptions } from 'pages/shop/utils';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createViewDetailsRoute } from 'routes';
 import { ProductFilters, ProductType, searchProducts, SortBy } from 'services';
 
 type ListHeaderProps = {
@@ -52,11 +54,13 @@ const ListHeader: React.FC<ListHeaderProps> = (props) => {
 };
 
 const Shop: React.FC = () => {
+  const navigate = useNavigate();
   const t = useTranslation('shop');
   const [filters, setFilters] = useState<ProductFilters>({});
   const [sortBy, setSortBy] = useState<SortBy>(SortBy.UNSORTED);
+  const { language } = useLanguage();
 
-  const products = searchProducts(filters, sortBy);
+  const products = searchProducts({ filters, sortBy, acceptLanguage: language });
 
   return (
     <Container lgStyle={{ gap: '3rem', padding: { bottom: 'xl' } }}>
@@ -73,14 +77,17 @@ const Shop: React.FC = () => {
       >
         {products.map((product) => (
           <Container key={product.id} xs={12} sm={6} lg={4} xl={3}>
-            <ShopProductCard
-              key={product.id}
-              id={product.id}
-              title={product.title}
-              amount={product.price.toString()}
-              images={[product.image]}
-              imageHeight="280px"
-            />
+            <BoxAnimation>
+              <ShopProductCard
+                key={product.id}
+                id={product.id}
+                title={product.title}
+                amount={product.price.toString()}
+                onView={() => navigate(createViewDetailsRoute(product.id.toString()))}
+                images={[product.image]}
+                imageHeight="280px"
+              />
+            </BoxAnimation>
           </Container>
         ))}
       </Container>

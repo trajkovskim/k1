@@ -1,16 +1,15 @@
-import { ProductProps } from 'components/card/types';
+import NoImageAvailable from 'assets/noimageavailable.jpg';
 import CarouselLazyLoadImages from 'components/CarouselLazyLoadImages';
 import React from 'react';
-import NoImageAvailable from 'assets/noimageavailable.jpg';
 
-type Props = Pick<ProductProps, 'images' | 'id'> & {
-  height: string;
-};
+type Props = React.ComponentProps<typeof CarouselLazyLoadImages>;
 
 const ProductCardImages: React.FC<Props> = (props) => {
   return (
     <CarouselLazyLoadImages
+      {...props}
       height={props.height}
+      width={props.width}
       fade
       arrows={false}
       initialSlide={0}

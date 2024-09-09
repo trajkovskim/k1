@@ -1,12 +1,26 @@
 import { products } from 'services/constants';
-import { ProductFilters, SortBy } from 'services/types';
+import { LocalizedText, Product, ProductDetailed, SearchProducts, SortBy } from 'services/types';
 
-export const searchProducts = (filters?: ProductFilters, sortBy?: SortBy) => {
+const findLocalizedTextByLanguage = (texts: LocalizedText[], language: string) =>
+  texts.find((localized) => localized.language.toLowerCase().startsWith(language.toLowerCase()));
+
+const mapToDetailed = (product: Product, acceptLanguage: string) => ({
+  ...product,
+  title: findLocalizedTextByLanguage(product.title, acceptLanguage)?.text ?? '',
+  description: findLocalizedTextByLanguage(product.description ?? [], acceptLanguage)?.text,
+});
+
+export const searchProducts = ({
+  filters,
+  sortBy,
+  pageNumber = 0,
+  pageSize = 100,
+  acceptLanguage = 'en',
+}: SearchProducts): ProductDetailed[] => {
   const filtered = products.filter((product) => {
     for (const [key, filter] of Object.entries(filters ?? {})) {
       const p =
         product[key as keyof typeof product] ?? product[key.substring(0, key.length - 1) as keyof typeof product];
-      console.log(key, filter, p, filters);
 
       if (
         !filter ||
@@ -28,14 +42,27 @@ export const searchProducts = (filters?: ProductFilters, sortBy?: SortBy) => {
     return true;
   });
 
-  return filtered.sort((product1, product2) => {
-    switch (sortBy) {
-      case SortBy.PRICE_ASC:
-        return product1.price - product2.price;
-      case SortBy.PRICE_DESC:
-        return product2.price - product1.price;
-      default:
-        return 0;
-    }
-  });
+  return filtered
+    .sort((product1, product2) => {
+      switch (sortBy) {
+        case SortBy.PRICE_ASC:
+          return product1.price - product2.price;
+        case SortBy.PRICE_DESC:
+          return product2.price - product1.price;
+        default:
+          return 0;
+      }
+    })
+    .slice(pageNumber * pageSize, (pageNumber + 1) * pageSize)
+    .map((product) => mapToDetailed(product, acceptLanguage));
+};
+
+export const getProduct = (id: number, acceptLanguage: string): ProductDetailed | undefined => {
+  const found = products.find((product) => product.id === id);
+
+  if (!found) {
+    return undefined;
+  }
+
+  return mapToDetailed(found, acceptLanguage);
 };

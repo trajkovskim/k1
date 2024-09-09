@@ -32,6 +32,10 @@ const Breadcrumb: React.FC<Props> = (props) => {
     paths.push({ label: t('shop'), pathname: Routes.SHOP });
   }
 
+  if (location.pathname.startsWith(Routes.CONTACT)) {
+    paths.push({ label: t('contact'), pathname: Routes.CONTACT });
+  }
+
   if (props.idLabel || id) {
     paths.push({ label: props.idLabel ?? id });
   }

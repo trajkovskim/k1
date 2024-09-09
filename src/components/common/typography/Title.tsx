@@ -10,6 +10,7 @@ type Props = React.ComponentProps<typeof Typography.Title> & {
   description?: string;
   gap?: string;
   size?: FontSize | TitleAndDescription<FontSize>;
+  afterTitle?: React.ReactNode;
 };
 
 const StyledTitle = styled(Typography.Title)``;
@@ -17,7 +18,9 @@ const StyledTitle = styled(Typography.Title)``;
 const Title: React.FC<Props> = ({ className, title, description, gap, size, ...props }) => {
   return (
     <Container className={className} styleConfig={{ gap: gap ?? '0.5rem' }}>
-      <StyledTitle {...props}>{title}</StyledTitle>
+      <StyledTitle {...props}>
+        {title} {props.afterTitle}
+      </StyledTitle>
       {description && <Text size={typeof size === 'object' ? size.description : size}>{description}</Text>}
     </Container>
   );

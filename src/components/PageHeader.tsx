@@ -8,7 +8,7 @@ type StyledPageHeaderProps = {
 };
 
 const StyledPageHeader = styled(Container)<StyledPageHeaderProps>`
-  min-height: 230px;
+  min-height: 200px;
   position: relative;
   color: #fff;
   transition: 200ms all;

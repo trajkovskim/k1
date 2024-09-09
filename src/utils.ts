@@ -7,7 +7,7 @@ export const goto = (url: string) => {
 };
 
 export const call = (tel: string) => {
-  window.open(`tel:${tel.replaceAll(/[^0-9]/g, '')}`);
+  window.open(`tel:+${tel.replaceAll(/[^0-9]/g, '')}`);
 };
 
 export const mailTo = (emailTo: string, otherParameters?: Record<string, string>) => {

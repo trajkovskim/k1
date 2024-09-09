@@ -10,6 +10,7 @@ type Props = {
   description?: React.ReactNode;
   onClick?: () => void;
   imageHeight?: string;
+  imageWidth?: string;
 };
 
 const ServiceCard: React.FC<Props> = (props) => {
@@ -20,7 +21,7 @@ const ServiceCard: React.FC<Props> = (props) => {
       bordered={false}
       // shadow={false}
       body={<Meta title={props.title} description={props.description} />}
-      cover={<Image src={props.image} objectFit="contain" height={props.imageHeight} />}
+      cover={<Image src={props.image} objectFit="contain" height={props.imageHeight} width={props.imageWidth} />}
       onClick={props.onClick}
     />
   );

@@ -1,6 +1,6 @@
 import TemplateApp from 'TemplateApp';
 import { AppLayout } from 'components/layout';
-import { DoTheChange, FitMarathon, Home, Result404, Shop } from 'pages';
+import { Contact, DoTheChange, FitMarathon, Home, Result404, Shop, ViewDetails } from 'pages';
 import React from 'react';
 import { Route } from 'react-router-dom';
 
@@ -14,6 +14,7 @@ export enum Routes {
   DO_THE_CHANGE = '/projects/do-the-change',
   FIT_MARATHON = '/projects/fit-marathon',
   NOT_FOUND = '/not-found',
+  CONTACT = '/contact',
 }
 
 export type RouteOption = Omit<React.ComponentProps<typeof Route>, 'children'> & {
@@ -35,6 +36,12 @@ const routes: RouteOptions = {
           [Routes.SHOP]: {
             element: <Shop />,
           },
+          [Routes.SHOP_VIEW_DETAILS]: {
+            element: <ViewDetails />,
+          },
+          [Routes.CONTACT]: {
+            element: <Contact />,
+          },
           [Routes.DO_THE_CHANGE]: {
             element: <DoTheChange />,
           },
@@ -49,5 +56,7 @@ const routes: RouteOptions = {
     },
   },
 };
+
+export const createViewDetailsRoute = (id: string) => Routes.SHOP_VIEW_DETAILS.replace(':id', id);
 
 export default routes;

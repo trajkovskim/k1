@@ -26,6 +26,15 @@ export const StyledFooter = styled(Layout.Footer)`
 export const WhiteBackgroundContainer = styled(Container)`
   background-color: ${(props) => props.theme.antd.primaryToken.colorBgBase};
   color: ${(props) => props.theme.antd.primaryToken.colorText};
+
+  .slick-arrow::after {
+    color: ${(props) => props.theme.antd.primaryToken.colorText};
+  }
+
+  .slick-dots li.slick-active button,
+  .slick-dots li button {
+    background: ${(props) => props.theme.antd.primaryToken.colorText};
+  }
 `;
 
 export const DarkBackgroundContainer = styled(Container)`
@@ -62,10 +71,6 @@ export const ColoredContainer = styled(Container)<TogglableContainerProps>`
           .slick-dots li.slick-active button,
           .slick-dots li button {
             background: ${(props) => props.theme.antd.primaryToken.colorText};
-          }
-
-          .ant-btn-primary {
-            color: ${props.theme.antd.primaryToken.Button?.primaryColor};
           }
         `;
       case 'secondary':

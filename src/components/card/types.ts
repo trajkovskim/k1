@@ -1,5 +1,6 @@
 export type ProductProps = {
   imageHeight?: string;
+  imageWidth?: string;
   id: number;
   title: string;
   summary?: string;

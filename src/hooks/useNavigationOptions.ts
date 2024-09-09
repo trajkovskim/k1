@@ -1,4 +1,4 @@
-import { HomeOutlined, ShoppingOutlined } from '@ant-design/icons';
+import { HomeOutlined, PhoneOutlined, ProjectOutlined, ShoppingOutlined } from '@ant-design/icons';
 import { useTranslation } from 'hooks';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -33,7 +33,7 @@ const useNavigationOptions = () => {
     [Routes.PROJECTS]: {
       label: t('projects'),
       active: location.pathname === Routes.DO_THE_CHANGE || location.pathname === Routes.FIT_MARATHON,
-      icon: React.createElement(ShoppingOutlined),
+      icon: React.createElement(ProjectOutlined),
       options: {
         [Routes.DO_THE_CHANGE]: {
           label: t('doTheChange'),
@@ -46,6 +46,12 @@ const useNavigationOptions = () => {
           navigate: () => navigate(Routes.FIT_MARATHON),
         },
       },
+    },
+    [Routes.CONTACT]: {
+      label: t('contact'),
+      navigate: () => navigate(Routes.CONTACT),
+      active: location.pathname === Routes.CONTACT,
+      icon: React.createElement(PhoneOutlined),
     },
   };
 

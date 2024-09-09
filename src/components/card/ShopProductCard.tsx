@@ -16,7 +16,14 @@ const ShopProductCard: React.FC<ProductProps> = (props) => {
           {formatMoney(props.amount ?? 0)}
         </Text>
       }
-      cover={<ProductCardImages id={props.id} images={props.images} height={props.imageHeight ?? '300px'} />}
+      cover={
+        <ProductCardImages
+          images={props.images ?? []}
+          height={props.imageHeight}
+          width={props.imageWidth}
+          objectFit="contain"
+        />
+      }
       onClick={props.onView}
     />
   );

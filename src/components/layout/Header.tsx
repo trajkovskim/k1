@@ -33,7 +33,7 @@ const Header: React.FC = () => {
           <NavigationMenu mode="horizontal" />
         </Container>
         <Container xs={0} lg="max-content" styleConfig={{ direction: 'row', gap: '1rem', alignItems: 'center' }}>
-          <TelephoneButton label />
+          <TelephoneButton label iconPosition="end" />
           <LanguageChanger />
         </Container>
 
