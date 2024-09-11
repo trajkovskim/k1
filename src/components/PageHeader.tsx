@@ -8,7 +8,6 @@ type StyledPageHeaderProps = {
 };
 
 const StyledPageHeader = styled(Container)<StyledPageHeaderProps>`
-  min-height: 200px;
   position: relative;
   color: #fff;
   transition: 200ms all;
@@ -53,13 +52,18 @@ type Props = React.PropsWithChildren &
 
 const PageHeader: React.FC<Props> = ({ children, imageSrc, loading, idLabel, ...props }) => {
   return (
-    <StyledPageHeader imageSrc={imageSrc} {...props}>
+    <StyledPageHeader
+      {...props}
+      imageSrc={imageSrc}
+      styleConfig={{ minHeight: '100px' }}
+      lgStyle={{ minHeight: '200px' }}
+    >
       {loading && <StyledSpinner />}
       <Container
         xs={PAGE_MAX_WIDTH}
         styleConfig={{
-          gap: '3rem',
-          padding: { left: 'md', right: 'md' },
+          gap: '0.5rem',
+          padding: { top: 'md', bottom: 'sm', left: 'md', right: 'md' },
           alignItems: 'center',
           centered: true,
         }}

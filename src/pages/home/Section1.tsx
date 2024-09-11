@@ -21,10 +21,11 @@ const Section1: React.FC = () => {
   });
 
   return (
-    <Container xs={`calc(100% - (100% - ${PAGE_MAX_WIDTH}) / 2)`} styleConfig={{ alignSelf: 'end', gap: '2rem' }}>
-      <Container
-        styleConfig={{ gap: '10px', direction: 'row', alignItems: 'center', padding: { left: 'md', right: 'md' } }}
-      >
+    <Container
+      xs={`calc(100% - (100% - ${PAGE_MAX_WIDTH}) / 2)`}
+      styleConfig={{ alignSelf: 'end', gap: '2rem', padding: { left: 'md', right: 'md' } }}
+    >
+      <Container styleConfig={{ gap: '10px', direction: 'row', alignItems: 'center' }}>
         <Title level={2} title={t('section1.title')} size="lg" />
         <Button
           type="link"

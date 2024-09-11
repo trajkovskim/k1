@@ -1,7 +1,8 @@
-import { Carousel, CarouselRef, ElementIntersection, Image, SpinnerGIF } from 'components/common';
+import { Carousel, CarouselRef } from 'components/common';
+import ImageLazyLoaded from 'components/ImageLazyLoaded';
 import React from 'react';
 
-type ImageProps = React.ComponentProps<typeof Image>;
+type ImageProps = React.ComponentProps<typeof ImageLazyLoaded>;
 
 type Props = React.ComponentProps<typeof Carousel> & {
   images: string[];
@@ -19,22 +20,7 @@ const CarouselLazyLoadImages = React.forwardRef<CarouselRef, Props>(
     return (
       <Carousel ref={ref} initialSlide={0} {...props} lazyLoad="ondemand">
         {images?.map((image, index) => (
-          <ElementIntersection
-            key={image}
-            onEnter={(ref) => {
-              ref?.querySelectorAll<HTMLImageElement>('img').forEach((imageRef) => {
-                imageRef.src = imageRef.srcset ?? imageRef.src;
-              });
-            }}
-          >
-            <Image
-              {...imageProps}
-              onClick={() => props.onImageClick?.(index)}
-              objectFit="contain"
-              srcSet={image}
-              src={SpinnerGIF}
-            />
-          </ElementIntersection>
+          <ImageLazyLoaded key={image} {...imageProps} onClick={() => props.onImageClick?.(index)} src={image} />
         ))}
       </Carousel>
     );

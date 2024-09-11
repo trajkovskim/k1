@@ -20,7 +20,7 @@ const StyledImageContainer = styled(Container)<StyledImageContainerProps>`
     background-size: cover;
     background-position: center center;
     background-color: ${(props) => (props.imageSrc ? '#232323' : '#fff')};
-    filter: blur(3px) brightness(70%);
+    filter: brightness(70%);
 
     position: absolute;
     width: 100%;

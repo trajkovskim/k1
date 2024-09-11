@@ -1,11 +1,22 @@
 import { RightCircleOutlined } from '@ant-design/icons';
-import { Button, Container, ServiceCard, Title } from 'components/common';
+import { ShopProductCard } from 'components/card';
+import { Button, Container, Title } from 'components/common';
 import { useLanguage, useTranslation } from 'hooks';
 import { PAGE_MAX_WIDTH } from 'pages/constants';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createViewDetailsRoute, Routes } from 'routes';
 import { ProductType, searchProducts } from 'services';
+import styled from 'styled-components';
+
+const StyledShopproductCard = styled(ShopProductCard)`
+  @media (max-width: ${(props) => props.theme.breakpoints.maxWidth.xs}) {
+    .ant-image,
+    img {
+      height: 200px !important;
+    }
+  }
+`;
 
 const Section2: React.FC = () => {
   const t = useTranslation('home');
@@ -19,10 +30,8 @@ const Section2: React.FC = () => {
   });
 
   return (
-    <Container xs={PAGE_MAX_WIDTH} styleConfig={{ centered: true, gap: '2rem' }}>
-      <Container
-        styleConfig={{ gap: '10px', direction: 'row', alignItems: 'center', padding: { left: 'md', right: 'md' } }}
-      >
+    <Container xs={PAGE_MAX_WIDTH} styleConfig={{ centered: true, gap: '2rem', padding: { left: 'md', right: 'md' } }}>
+      <Container styleConfig={{ gap: '10px', direction: 'row', alignItems: 'center' }}>
         <Title level={2} title={t('section2.title')} size="lg" />
         <Button
           type="link"
@@ -32,14 +41,24 @@ const Section2: React.FC = () => {
           onClick={() => navigate(Routes.SHOP)}
         />
       </Container>
-      <Container styleConfig={{ gap: '15px', direction: 'row', wrap: true, alignItems: 'center' }}>
+      <Container
+        styleConfig={{
+          gap: '15px',
+          direction: 'row',
+          wrap: true,
+          alignItems: 'center',
+        }}
+      >
         {programs.map((program) => (
           <Container key={program.id} xs={12} md={4}>
-            <ServiceCard
+            <StyledShopproductCard
+              key={program.id}
+              id={program.id}
               title={program.title}
-              image={program.image}
+              amount={program.price.toString()}
+              images={[program.image]}
               imageHeight="300px"
-              onClick={() => navigate(createViewDetailsRoute(program.id.toString()))}
+              onView={() => navigate(createViewDetailsRoute(program.id.toString()))}
             />
           </Container>
         ))}

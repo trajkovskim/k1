@@ -2,6 +2,7 @@ import ProductCardImages from 'components/card/ProductCardImages';
 import ProductTitle from 'components/card/ProductTitle';
 import { ProductProps } from 'components/card/types';
 import { Card, Text } from 'components/common';
+import ImageLazyLoaded from 'components/ImageLazyLoaded';
 import React from 'react';
 import { formatMoney } from 'utils';
 
@@ -17,12 +18,16 @@ const ShopProductCard: React.FC<ProductProps> = (props) => {
         </Text>
       }
       cover={
-        <ProductCardImages
-          images={props.images ?? []}
-          height={props.imageHeight}
-          width={props.imageWidth}
-          objectFit="contain"
-        />
+        props.images?.length === 1 ? (
+          <ImageLazyLoaded src={props.images[0]} height={props.imageHeight} width={props.imageWidth} />
+        ) : props.images ? (
+          <ProductCardImages
+            images={props.images ?? []}
+            height={props.imageHeight}
+            width={props.imageWidth}
+            objectFit="contain"
+          />
+        ) : undefined
       }
       onClick={props.onView}
     />

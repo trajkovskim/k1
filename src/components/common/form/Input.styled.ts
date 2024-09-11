@@ -52,19 +52,24 @@ export const StyledFormFieldContainer = styled.div<StyledFormFieldContainerProps
     }
   }
 
+  input:not(.ant-select-selection-search-input) {
+    height: ${(props) => props.size && getCalcInputHeightCss(props.theme, props.size, !!props.label)} !important;
+    padding-top: ${(props) => props.size && getCalcPaddingTopCss(props.theme, props.size)} !important;
+  }
+
+  .ant-select {
+    height: ${(props) => props.size && getCalcInputHeightCss(props.theme, props.size, !!props.label)} !important;
+  }
+
+  .ant-select-arrow,
+  .ant-select-selection-item,
+  .ant-select-selection-placeholder {
+    padding-top: ${(props) => props.size && getCalcPaddingTopCss(props.theme, props.size)} !important;
+  }
+
   ${(props) =>
     props.label &&
     css`
-      input,
-      .ant-select {
-        height: ${props.size && getCalcInputHeightCss(props.theme, props.size, true)} !important;
-      }
-
-      .ant-select-arrow,
-      .ant-select-selection-item {
-        padding-top: ${props.size && getCalcPaddingTopCss(props.theme, props.size)} !important;
-      }
-
       &:has([class^='ant-'][class*='-borderless'])::before {
         left: 0;
       }

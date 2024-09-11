@@ -26,11 +26,11 @@ export const baseTokenConfig: ThemeConfig = {
     fontFamily: 'Noto Sans, sans-serif',
     fontSize: remToPx(1),
     padding: 3.2,
-    fontSizeHeading1: `clamp(2.5rem, calc(2.2rem + 1.5vw), 4rem)` as never,
-    fontSizeHeading2: `clamp(2rem, calc(1.7rem + 1.5vw), 3.5rem)` as never,
-    fontSizeHeading3: `clamp(2rem, calc(1.8rem + 1vw), 3rem)` as never,
-    fontSizeHeading4: `clamp(1.5rem, calc(1.3rem + 1vw), 2.5rem)` as never,
-    fontSizeHeading5: `clamp(1rem, calc(0.8rem + 1vw), 2rem)` as never,
+    fontSizeHeading1: `clamp(2rem, calc(1.7rem + 1.5vw), 3.5rem)` as never,
+    fontSizeHeading2: `clamp(2rem, calc(1.8rem + 1vw), 3rem)` as never,
+    fontSizeHeading3: `clamp(1.5rem, calc(1.3rem + 1vw), 2.5rem)` as never,
+    fontSizeHeading4: `clamp(1rem, calc(0.8rem + 1vw), 2rem)` as never,
+    fontSizeHeading5: `1rem` as never,
   },
 };
 
@@ -41,7 +41,7 @@ export const secondaryTokenConfig: ThemeConfig = {
     colorText: '#fff',
     colorLink: '#42a046',
     fontFamily: 'Noto Sans, sans-serif',
-    fontSize: remToPx(1),
+    fontSize: remToPx(0.75),
     padding: 3.2,
   },
 };
@@ -104,6 +104,7 @@ export default {
   },
   layout: {
     header: {
+      height: '80px',
       position: 'sticky',
       top: '0',
       'z-index': '20',

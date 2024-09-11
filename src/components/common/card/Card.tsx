@@ -1,9 +1,14 @@
+import { Card as AntdCard } from 'antd';
 import Container from 'components/common/Container';
 import React from 'react';
 import styled from 'styled-components';
-import { Card as AntdCard } from 'antd';
+import { Breakpoints } from 'theme';
 
-type StyledCardProps = {
+export type BreakpointsProps<T> = {
+  [key in Breakpoints]?: T;
+};
+
+type StyledCardProps = BreakpointsProps<'row' | 'column'> & {
   transparent?: boolean;
   shadow?: boolean;
 };
@@ -24,6 +29,12 @@ type Props = React.ComponentProps<typeof AntdCard> &
 
 const Card: React.FC<Props> = ({ footer, cover, onImageContainer, body, ...props }) => {
   props.shadow = props.shadow ?? true;
+  props.sm = props.sm ?? props.xs;
+  props.md = props.md ?? props.sm;
+  props.lg = props.lg ?? props.md;
+  props.xl = props.xl ?? props.lg;
+  props['2xl'] = props['2xl'] ?? props.xl;
+  props['3xl'] = props['3xl'] ?? props['2xl'];
 
   return (
     <StyledCard

@@ -78,12 +78,12 @@ const Contact: React.FC = () => {
           <Form form={form} onFinish={handleSend}>
             <Container styleConfig={{ gap: '1rem' }}>
               <Container styleConfig={{ wrap: true, direction: 'row', gap: '1rem' }}>
-                <Container xs={6}>
+                <Container xs={12} md={6}>
                   <FormItem name="name">
                     <Input name="name" size="lg" fullwidth placeholder={t('giveUsAMessage.nameInput.placeholder')} />
                   </FormItem>
                 </Container>
-                <Container xs={6}>
+                <Container xs={12} md={6}>
                   <FormItem name="email">
                     <Input
                       type="email"
@@ -94,7 +94,7 @@ const Contact: React.FC = () => {
                     />
                   </FormItem>
                 </Container>
-                <Container xs={6}>
+                <Container xs={12} md={6}>
                   <FormItem name="phone">
                     <Input
                       type="tel"
@@ -105,7 +105,7 @@ const Contact: React.FC = () => {
                     />
                   </FormItem>
                 </Container>
-                <Container xs={6}>
+                <Container xs={12} md={6}>
                   <FormItem name="subject">
                     <Input
                       name="subject"

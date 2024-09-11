@@ -64,7 +64,7 @@ const Shop: React.FC = () => {
 
   return (
     <Container lgStyle={{ gap: '3rem', padding: { bottom: 'xl' } }}>
-      <PageHeader xs={12} styleConfig={{ direction: 'row', centered: true, padding: 'lg' }}>
+      <PageHeader xs={12} styleConfig={{ direction: 'row', centered: true, padding: 'sm' }}>
         <Title title={t('title')} />
       </PageHeader>
 
