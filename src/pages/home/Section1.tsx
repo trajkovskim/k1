@@ -3,6 +3,7 @@ import { ShopProductCard } from 'components/card';
 import { Button, Container, HorizontalList, Title } from 'components/common';
 import { useLanguage, useTranslation } from 'hooks';
 import { PAGE_MAX_WIDTH } from 'pages/constants';
+import { getPrice } from 'pages/view-details/utils';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createViewDetailsRoute, Routes } from 'routes';
@@ -42,7 +43,7 @@ const Section1: React.FC = () => {
             id={product.id}
             title={product.title}
             images={[product.image]}
-            amount={product.price}
+            amount={getPrice(product)}
             imageHeight="270px"
             imageWidth="100%"
             onView={() => navigate(createViewDetailsRoute(product.id.toString()))}

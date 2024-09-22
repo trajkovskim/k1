@@ -7,6 +7,7 @@ import { PAGE_MAX_WIDTH } from 'pages/constants';
 import SortDropdown from 'pages/shop/SortDropdown';
 import { ProductTypeFilterExtender } from 'pages/shop/types';
 import { convertProductTypesToFilterOptions } from 'pages/shop/utils';
+import { getPrice } from 'pages/view-details/utils';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createViewDetailsRoute } from 'routes';
@@ -82,7 +83,7 @@ const Shop: React.FC = () => {
                 key={product.id}
                 id={product.id}
                 title={product.title}
-                amount={product.price}
+                amount={getPrice(product)}
                 onView={() => navigate(createViewDetailsRoute(product.id.toString()))}
                 images={[product.image]}
                 imageHeight="280px"

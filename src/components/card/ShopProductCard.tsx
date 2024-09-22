@@ -3,7 +3,6 @@ import ProductTitle from 'components/card/ProductTitle';
 import { ProductProps } from 'components/card/types';
 import { Card, Text } from 'components/common';
 import ImageLazyLoaded from 'components/ImageLazyLoaded';
-import { formatAmount } from 'formatters';
 import React from 'react';
 
 const ShopProductCard: React.FC<ProductProps> = (props) => {
@@ -14,7 +13,7 @@ const ShopProductCard: React.FC<ProductProps> = (props) => {
       body={<ProductTitle title={props.title} summary={props.summary} onView={props.onView} />}
       footer={
         <Text size="lg" strong>
-          {formatAmount(props.amount)}
+          {props.amount}
         </Text>
       }
       cover={
