@@ -1,14 +1,27 @@
+import { Form } from 'antd';
 import { ShopProductCard } from 'components/card';
-import { Breadcrumb, Button, Container, Divider, Dropdown, Image, Input, Text, Title } from 'components/common';
+import {
+  Breadcrumb,
+  Button,
+  Container,
+  Counter,
+  Divider,
+  Dropdown,
+  FormItem,
+  Image,
+  Text,
+  Title,
+} from 'components/common';
 import { WhiteBackgroundContainer } from 'components/layout';
 import { useLanguage, useTranslation } from 'hooks';
 import { PAGE_MAX_WIDTH } from 'pages/constants';
-import React from 'react';
+import { AddToCartForm } from 'pages/view-details/types';
+import { findProductCombination, getPrice } from 'pages/view-details/utils';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createViewDetailsRoute } from 'routes';
 import { getProduct, searchProducts } from 'services';
 import styled from 'styled-components';
-import { formatMoney } from 'utils';
 
 const StyledShopproductCard = styled(ShopProductCard)`
   @media (max-width: ${(props) => props.theme.breakpoints.maxWidth.xs}) {
@@ -27,6 +40,28 @@ const ViewDetails: React.FC = () => {
   const t = useTranslation('viewDetails');
   const navigate = useNavigate();
 
+  const [form] = Form.useForm<AddToCartForm>();
+  const [formValues, setFormValues] = useState<AddToCartForm>();
+
+  if (!product) {
+    throw new Error('Product not found');
+  }
+
+  const handleFormChange = (_: unknown, values: AddToCartForm) => {
+    setFormValues(values);
+  };
+
+  const handleAddToCart = (data: AddToCartForm) => {
+    const selectedCombination = findProductCombination(product, data);
+
+    console.log({
+      productId: product.id,
+      price: selectedCombination?.price,
+      quantity: data.quantity,
+      attributes: selectedCombination?.attributes,
+    });
+  };
+
   return (
     <Container
       xs={PAGE_MAX_WIDTH}
@@ -43,30 +78,36 @@ const ViewDetails: React.FC = () => {
           </Container>
           <Title level={4} title={product?.title ?? ''} gap="1rem" />
           <Text size="xl" strong>
-            {product?.price && formatMoney(product?.price)}
+            {getPrice(product, formValues)}
           </Text>
           <Divider />
-
-          <Container styleConfig={{ wrap: true, direction: 'row', gap: '10px' }}>
-            <Container xs={12}>
-              <Dropdown
-                fullwidth
-                label="Flavor"
-                placeholder="Flavor"
-                size="lg"
-                options={[{ label: 'Чоколадо', value: 'chocolate' }]}
-              />
+          <Form form={form} onFinish={handleAddToCart} onValuesChange={handleFormChange}>
+            <Container styleConfig={{ wrap: true, direction: 'row', gap: '10px' }}>
+              {product?.attributes?.map((attribute) => (
+                <Container key={attribute.key} xs={12}>
+                  <FormItem name={['attributes', attribute.id.toString()]}>
+                    <Dropdown
+                      placeholder={attribute.name}
+                      label={attribute.name}
+                      options={attribute.values.map((value) => ({ value: value.id, label: value.text }))}
+                      size="lg"
+                      fullwidth
+                    />
+                  </FormItem>
+                </Container>
+              ))}
+              <Container xs={12} sm={3.5}>
+                <FormItem name="quantity" initialValue={0}>
+                  <Counter size="xl" />
+                </FormItem>
+              </Container>
+              <Container xs={12} sm={8.5}>
+                <Button htmlType="submit" type="primary" size="xl">
+                  Add to cart
+                </Button>
+              </Container>
             </Container>
-
-            <Container xs={12} md={3}>
-              <Input type="number" size="lg" label="Quantity" fullwidth />
-            </Container>
-            <Container xs={12} md={9}>
-              <Button type="primary" size="xl">
-                Add to cart
-              </Button>
-            </Container>
-          </Container>
+          </Form>
           <Divider />
           <Text size="lg">{t('overview')}</Text>
           <Text>{product?.description}</Text>
@@ -82,7 +123,7 @@ const ViewDetails: React.FC = () => {
                 key={product.id}
                 id={product.id}
                 title={product.title}
-                amount={product.price.toString()}
+                amount={product.price}
                 onView={() => navigate(createViewDetailsRoute(product.id.toString()))}
                 images={[product.image]}
                 imageHeight="200px"

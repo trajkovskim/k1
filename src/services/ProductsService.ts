@@ -4,11 +4,22 @@ import { LocalizedText, Product, ProductDetailed, SearchProducts, SortBy } from 
 const findLocalizedTextByLanguage = (texts: LocalizedText[], language: string) =>
   texts.find((localized) => localized.language.toLowerCase().startsWith(language.toLowerCase()));
 
-const mapToDetailed = (product: Product, acceptLanguage: string) => ({
+const mapToDetailed = (product: Product, acceptLanguage: string): ProductDetailed => ({
   ...product,
   title: findLocalizedTextByLanguage(product.title, acceptLanguage)?.text ?? '',
   description: findLocalizedTextByLanguage(product.description ?? [], acceptLanguage)?.text,
+  attributes: product.attributes?.map((attribute) => ({
+    ...attribute,
+    name: findLocalizedTextByLanguage(attribute.name, acceptLanguage)?.text ?? '',
+    values: attribute.values.map((value) => ({
+      ...value,
+      text: findLocalizedTextByLanguage(value.text, acceptLanguage)?.text ?? '',
+    })),
+  })),
 });
+
+const getSortPrice = (product: Product) =>
+  typeof product.price === 'object' ? product.price.from : product.price ?? 0;
 
 export const searchProducts = ({
   filters,
@@ -46,9 +57,9 @@ export const searchProducts = ({
     .sort((product1, product2) => {
       switch (sortBy) {
         case SortBy.PRICE_ASC:
-          return product1.price - product2.price;
+          return getSortPrice(product1) - getSortPrice(product2);
         case SortBy.PRICE_DESC:
-          return product2.price - product1.price;
+          return getSortPrice(product2) - getSortPrice(product1);
         default:
           return 0;
       }

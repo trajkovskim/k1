@@ -71,5 +71,7 @@
   "templateapp.VITAMIN": "Vitamins",
   "templateapp.PROTEIN_BARS": "Protein bars",
   "templateapp.SPORT": "Sport",
-  "templateapp.PROGRAM": "Program"
+  "templateapp.PROGRAM": "Program",
+  "templateapp.viewDetails.formula1Form.flavor.label": "Flavor",
+  "templateapp.viewDetails.formula1Form.flavor.CHOCOLATE": "Chocolate"
 }

@@ -1,10 +1,12 @@
+import { Product } from 'services';
+
 export type ProductProps = {
   imageHeight?: string;
   imageWidth?: string;
   id: number;
   title: string;
   summary?: string;
-  amount?: string;
+  amount?: Product['price'];
   bookmarked?: boolean;
   images?: string[];
   onView?: () => void;

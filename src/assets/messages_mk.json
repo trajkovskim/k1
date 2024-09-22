@@ -71,5 +71,7 @@
   "templateapp.VITAMIN": "Витамини",
   "templateapp.PROTEIN_BARS": "Протеински шипки",
   "templateapp.SPORT": "Спорт",
-  "templateapp.PROGRAM": "Програма"
+  "templateapp.PROGRAM": "Програма",
+  "templateapp.viewDetails.formula1Form.flavor.label": "Flavor",
+  "templateapp.viewDetails.formula1Form.flavor.CHOCOLATE": "Chocolate"
 }

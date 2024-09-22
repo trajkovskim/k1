@@ -14,8 +14,8 @@ export { default as Tabs } from 'components/common/Tabs';
 export { default as Transition, type TransitionHandle } from 'components/common/Transition';
 export { default as SpinnerGIF } from 'components/spinner.gif';
 
-// HorizontaList
 export * from 'components/common/card';
 export * from 'components/common/form';
 export * from 'components/common/horizontalList';
+export * from 'components/common/jsonform';
 export * from 'components/common/typography';

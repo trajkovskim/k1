@@ -82,7 +82,7 @@ const Shop: React.FC = () => {
                 key={product.id}
                 id={product.id}
                 title={product.title}
-                amount={product.price.toString()}
+                amount={product.price}
                 onView={() => navigate(createViewDetailsRoute(product.id.toString()))}
                 images={[product.image]}
                 imageHeight="280px"

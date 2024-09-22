@@ -4,6 +4,10 @@ export enum SortBy {
   PRICE_DESC = 'PRICE_DESC',
 }
 
+export enum Formula1Flavor {
+  CHOCOLATE = 'CHOCOLATE',
+}
+
 export enum ProductType {
   PROTEIN_MIX = 'PROTEIN_MIX',
   THERMOJETICS = 'THERMOJETICS',
@@ -19,14 +23,51 @@ export type LocalizedText = {
   text: string;
 };
 
+export type ProductPrice = number | { from: number; to: number };
+
+type ProductAttributeValue = {
+  id: number;
+  key: string;
+  text: LocalizedText[];
+};
+
+type ProductAttribute = {
+  id: number;
+  key: string;
+  name: LocalizedText[];
+  values: ProductAttributeValue[];
+};
+
 export type Product = {
   id: number;
   title: LocalizedText[];
   description?: LocalizedText[];
   types: ProductType[];
-  price: number;
+  price?: ProductPrice;
   image: string;
   featured?: boolean;
+  attributes?: ProductAttribute[];
+  combinations?: ProductAttributeCombination[];
+};
+
+export type ConnectionNode = { attrId: number; attrValueId: number };
+
+type ProductAttributeCombination = {
+  attributes: ConnectionNode[];
+  price: number;
+};
+
+type ProductAttributeValueDetailed = {
+  id: number;
+  key: string;
+  text: string;
+};
+
+type ProductAttributeDetailed = {
+  id: number;
+  key: string;
+  name: string;
+  values: ProductAttributeValueDetailed[];
 };
 
 export type ProductDetailed = {
@@ -34,8 +75,11 @@ export type ProductDetailed = {
   title: string;
   description?: string;
   types: ProductType[];
-  price: number;
+  price?: ProductPrice;
   image: string;
+  featured?: boolean;
+  attributes?: ProductAttributeDetailed[];
+  combinations?: ProductAttributeCombination[];
 };
 
 export type ProductFilters = {

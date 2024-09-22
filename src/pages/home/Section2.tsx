@@ -55,7 +55,7 @@ const Section2: React.FC = () => {
               key={program.id}
               id={program.id}
               title={program.title}
-              amount={program.price.toString()}
+              amount={program.price}
               images={[program.image]}
               imageHeight="300px"
               onView={() => navigate(createViewDetailsRoute(program.id.toString()))}

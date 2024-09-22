@@ -42,7 +42,7 @@ const Section1: React.FC = () => {
             id={product.id}
             title={product.title}
             images={[product.image]}
-            amount={product.price.toString()}
+            amount={product.price}
             imageHeight="270px"
             imageWidth="100%"
             onView={() => navigate(createViewDetailsRoute(product.id.toString()))}

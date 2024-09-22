@@ -22,12 +22,10 @@ export const inputCss = css<StyledInputWithRightContainerProps>`
 
 export const StyledAutocomplete = styled(AntdAutoComplete)<StyledInputWithRightContainerProps>`
   ${inputCss}
-  height: ${(props) => props.newSize && getCalcInputHeightCss(props.theme, props.newSize, false)};
 `;
 
 export const StyledInput = styled(AntdInput)<StyledInputWithRightContainerProps>`
   ${inputCss}
-  height: ${(props) => props.newSize && getCalcInputHeightCss(props.theme, props.newSize, false)};
 `;
 
 export const StyledTextarea = styled(AntdInput.TextArea)<StyledInputWithRightContainerProps>`
@@ -52,24 +50,22 @@ export const StyledFormFieldContainer = styled.div<StyledFormFieldContainerProps
     }
   }
 
-  input:not(.ant-select-selection-search-input) {
-    height: ${(props) => props.size && getCalcInputHeightCss(props.theme, props.size, !!props.label)} !important;
-    padding-top: ${(props) => props.size && getCalcPaddingTopCss(props.theme, props.size)} !important;
-  }
-
+  input:not(.ant-select-selection-search-input),
   .ant-select {
+    font-size: inherit;
     height: ${(props) => props.size && getCalcInputHeightCss(props.theme, props.size, !!props.label)} !important;
-  }
-
-  .ant-select-arrow,
-  .ant-select-selection-item,
-  .ant-select-selection-placeholder {
-    padding-top: ${(props) => props.size && getCalcPaddingTopCss(props.theme, props.size)} !important;
   }
 
   ${(props) =>
     props.label &&
     css`
+      input:not(.ant-select-selection-search-input),
+      .ant-select-arrow,
+      .ant-select-selection-item,
+      .ant-select-selection-placeholder {
+        padding-top: ${props.size && getCalcPaddingTopCss(props.theme, props.size)} !important;
+      }
+
       &:has([class^='ant-'][class*='-borderless'])::before {
         left: 0;
       }
