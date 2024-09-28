@@ -1,4 +1,4 @@
-export { default as Dropdown } from 'components/common/form/Dropdown';
+export { default as Select } from 'components/common/form/Select';
 export { default as Checkbox } from 'components/common/form/Checkbox';
 export { default as Input } from 'components/common/form/Input';
 export { default as Autocomplete } from 'components/common/form/Autocomplete';

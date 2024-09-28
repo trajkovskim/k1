@@ -2,10 +2,9 @@ import { RightCircleOutlined } from '@ant-design/icons';
 import { ShopProductCard } from 'components/card';
 import { Button, Container, Title } from 'components/common';
 import { useLanguage, useTranslation } from 'hooks';
-import { PAGE_MAX_WIDTH } from 'pages/constants';
+import { PAGE_LEFT_PADDING, PAGE_MAX_WIDTH, PAGE_RIGHT_PADDING } from 'pages/constants';
 import { getPrice } from 'pages/view-details/utils';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { createViewDetailsRoute, Routes } from 'routes';
 import { ProductType, searchProducts } from 'services';
 import styled from 'styled-components';
@@ -21,7 +20,6 @@ const StyledShopproductCard = styled(ShopProductCard)`
 
 const Section2: React.FC = () => {
   const t = useTranslation('home');
-  const navigate = useNavigate();
   const { language } = useLanguage();
 
   const programs = searchProducts({
@@ -31,23 +29,20 @@ const Section2: React.FC = () => {
   });
 
   return (
-    <Container xs={PAGE_MAX_WIDTH} styleConfig={{ centered: true, gap: '2rem', padding: { left: 'md', right: 'md' } }}>
+    <Container
+      xs={PAGE_MAX_WIDTH}
+      styleConfig={{ centered: true, gap: '2rem', padding: { left: PAGE_LEFT_PADDING, right: PAGE_RIGHT_PADDING } }}
+    >
       <Container styleConfig={{ gap: '10px', direction: 'row', alignItems: 'center' }}>
         <Title level={2} title={t('section2.title')} size="lg" />
-        <Button
-          type="link"
-          size="lg"
-          icon={<RightCircleOutlined />}
-          iconPosition="end"
-          onClick={() => navigate(Routes.SHOP)}
-        />
+        <Button type="link" size="lg" icon={<RightCircleOutlined />} iconPosition="end" href={Routes.SHOP} />
       </Container>
       <Container
         styleConfig={{
           gap: '15px',
           direction: 'row',
           wrap: true,
-          alignItems: 'center',
+          alignItems: 'stretch',
         }}
       >
         {programs.map((program) => (
@@ -58,8 +53,9 @@ const Section2: React.FC = () => {
               title={program.title}
               amount={getPrice(program)}
               images={[program.image]}
-              imageHeight="300px"
-              onView={() => navigate(createViewDetailsRoute(program.id.toString()))}
+              imageHeight="270px"
+              imageWidth="100%"
+              href={createViewDetailsRoute(program.id.toString())}
             />
           </Container>
         ))}

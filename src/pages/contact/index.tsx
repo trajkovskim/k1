@@ -5,7 +5,7 @@ import { EmailButton, TelephoneButton } from 'components/layout';
 import { useSocialMedias, useTranslation } from 'hooks';
 import { PAGE_MAX_WIDTH } from 'pages/constants';
 import React from 'react';
-import { goto, mailTo } from 'utils';
+import { createMailToLink } from 'utils';
 
 type ContactForm = {
   name?: string;
@@ -46,7 +46,7 @@ const Contact: React.FC = () => {
       body += `${t('giveUsAMessage.messageInput.placeholder')}: ${values.message}\n\r`;
     }
 
-    mailTo(email, { subject: values.subject, body: encodeURIComponent(body) });
+    window.open(createMailToLink(email, { subject: values.subject, body: encodeURIComponent(body) }), '_self');
   };
 
   return (
@@ -80,7 +80,13 @@ const Contact: React.FC = () => {
               <Container styleConfig={{ wrap: true, direction: 'row', gap: '1rem' }}>
                 <Container xs={12} md={6}>
                   <FormItem name="name">
-                    <Input name="name" size="lg" fullwidth placeholder={t('giveUsAMessage.nameInput.placeholder')} />
+                    <Input
+                      name="name"
+                      size="lg"
+                      fullwidth
+                      placeholder={t('giveUsAMessage.nameInput.placeholder')}
+                      label={t('giveUsAMessage.nameInput.placeholder')}
+                    />
                   </FormItem>
                 </Container>
                 <Container xs={12} md={6}>
@@ -90,6 +96,7 @@ const Contact: React.FC = () => {
                       name="email"
                       size="lg"
                       fullwidth
+                      label={t('giveUsAMessage.emailInput.placeholder')}
                       placeholder={t('giveUsAMessage.emailInput.placeholder')}
                     />
                   </FormItem>
@@ -101,6 +108,7 @@ const Contact: React.FC = () => {
                       name="phone"
                       size="lg"
                       fullwidth
+                      label={t('giveUsAMessage.phoneInput.placeholder')}
                       placeholder={t('giveUsAMessage.phoneInput.placeholder')}
                     />
                   </FormItem>
@@ -111,6 +119,7 @@ const Contact: React.FC = () => {
                       name="subject"
                       size="lg"
                       fullwidth
+                      label={t('giveUsAMessage.subjectInput.placeholder')}
                       placeholder={t('giveUsAMessage.subjectInput.placeholder')}
                     />
                   </FormItem>
@@ -123,6 +132,7 @@ const Contact: React.FC = () => {
                     size="lg"
                     fullwidth
                     rows={10}
+                    label={t('giveUsAMessage.messageInput.placeholder')}
                     placeholder={t('giveUsAMessage.messageInput.placeholder')}
                   />
                 </FormItem>
@@ -157,7 +167,7 @@ const Contact: React.FC = () => {
                   icon={socialMedia.icon}
                   type="link"
                   size="lg"
-                  onClick={() => goto(socialMedia.href)}
+                  href={socialMedia.href}
                 />
               ))}
             </Container>

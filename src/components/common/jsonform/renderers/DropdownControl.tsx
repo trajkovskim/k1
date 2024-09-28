@@ -1,10 +1,10 @@
 import { ControlProps, OwnPropsOfEnum } from '@jsonforms/core';
 import { withJsonFormsEnumProps } from '@jsonforms/react';
-import Dropdown from 'components/common/form/Dropdown';
+import Select from 'components/common/form/Select';
 import { getCommonInputProps } from 'components/common/jsonform/renderers/utils';
 import React from 'react';
 
-type Props = Omit<React.ComponentProps<typeof Dropdown>, keyof ControlProps | keyof OwnPropsOfEnum> &
+type Props = Omit<React.ComponentProps<typeof Select>, keyof ControlProps | keyof OwnPropsOfEnum> &
   ControlProps &
   OwnPropsOfEnum;
 
@@ -14,7 +14,7 @@ const DropdownControl: React.FC<Props> = (props) => {
   console.log(props);
 
   return (
-    <Dropdown
+    <Select
       {...otherProps}
       {...getCommonInputProps(props)}
       onChange={(value, options) => {

@@ -10,4 +10,6 @@ export type ProductProps = {
   onView?: () => void;
   fullwidth?: boolean;
   className?: string;
+  href?: string;
+  noDraggable?: boolean;
 };

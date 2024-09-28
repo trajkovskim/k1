@@ -5,3 +5,5 @@ export enum ProductTypeFilterExtender {
 }
 
 export type ProductTypeFilter = ProductType | ProductTypeFilterExtender;
+
+export type QueryParameters = 'types' | 'featured' | 'sortBy';

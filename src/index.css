@@ -47,6 +47,7 @@ span.ant-typography,
 .ant-typography,
 .ant-carousel,
 .ant-btn-link,
-.ant-btn-text {
+.ant-btn-text,
+a {
   color: inherit;
 }

@@ -1,8 +1,10 @@
 import { MenuProps } from 'antd';
+import { ItemType, MenuItemType } from 'antd/es/menu/interface';
 import { Text } from 'components/common';
-import { StyledNav } from 'components/layout/Layout.styled';
+import { StyledNavMenu } from 'components/layout/Layout.styled';
 import { useNavigationOptions } from 'hooks';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 type Props = {
   mode: MenuProps['mode'];
@@ -10,19 +12,25 @@ type Props = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const createMenuOptions = (options: ReturnType<typeof useNavigationOptions>, onNavigate?: () => void): any =>
+export const createMenuOptions = (
+  options: ReturnType<typeof useNavigationOptions>,
+  mode: MenuProps['mode'],
+  onNavigate?: () => void
+): ItemType<MenuItemType>[] =>
   Object.values(options).map((option) => ({
     key: option.label,
-    label: <Text>{option.label}</Text>,
-    onClick:
-      option.navigate &&
-      (() => {
-        option.navigate?.();
-        onNavigate?.();
-      }),
+    label: option.href ? (
+      <Link to={option.href}>
+        <Text>{option.label}</Text>
+      </Link>
+    ) : (
+      <Text>{option.label}</Text>
+    ),
+    onClick: option.href && onNavigate,
     icon: option.icon,
-    type: option.options ? 'submenu' : 'item',
-    children: option.options ? createMenuOptions(option.options, onNavigate) : undefined,
+    style: mode === 'horizontal' ? { paddingLeft: '15px', paddingRight: '15px' } : {},
+    type: (option.options ? 'submenu' : 'item') as never,
+    children: option.options ? createMenuOptions(option.options, mode, onNavigate) : undefined,
   }));
 
 export const findActive = (options?: ReturnType<typeof useNavigationOptions>): string[] => {
@@ -45,8 +53,9 @@ const NavigationMenu: React.FC<Props> = (props) => {
 
   return (
     <nav>
-      <StyledNav
-        items={createMenuOptions(navOptions, props.onNavigate)}
+      <StyledNavMenu
+        inlineIndent={15}
+        items={createMenuOptions(navOptions, props.mode, props.onNavigate)}
         mode={props.mode}
         selectedKeys={selectedKeys}
       />

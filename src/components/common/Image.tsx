@@ -41,6 +41,7 @@ export type Props = React.ComponentProps<typeof ImageAntd> & StyledImageProps;
 const Image: React.FC<Props> = ({ preview = false, width = '100%', ...props }) => {
   return (
     <StyledImage
+      rootClassName={props.className}
       preview={preview}
       draggable="false"
       rounded={props.rounded}

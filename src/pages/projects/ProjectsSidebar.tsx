@@ -14,7 +14,10 @@ const ProjectsSidebar: React.FC = () => {
       <Text strong size="xl">
         Проекти
       </Text>
-      <Menu items={createMenuOptions(navOptions[Routes.PROJECTS].options ?? {})} selectedKeys={selectedKeys} />
+      <Menu
+        items={createMenuOptions(navOptions[Routes.PROJECTS].options ?? {}, 'vertical')}
+        selectedKeys={selectedKeys}
+      />
     </Container>
   );
 };

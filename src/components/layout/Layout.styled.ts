@@ -7,8 +7,9 @@ export const StyledHeader = styled(Layout.Header)`
   ${(props) => createPropeties(props.theme.layout.header)};
 `;
 
-export const StyledNav = styled(Menu)`
+export const StyledNavMenu = styled(Menu)`
   user-select: none;
+  border-bottom: none;
 
   ${(props) => createPropeties(props.theme.layout.nav)};
 `;

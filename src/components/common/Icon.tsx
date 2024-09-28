@@ -64,9 +64,10 @@ type Props = React.ComponentProps<'span'> &
     icon: React.ReactNode;
   };
 
-const Icon: React.FC<Props> = ({ height, width, badge, icon, disabled, ...props }) => {
+const Icon = React.forwardRef<HTMLSpanElement, Props>(({ height, width, badge, icon, disabled, ...props }, ref) => {
   return (
     <IconWrapper
+      ref={ref}
       {...props}
       height={height}
       width={width}
@@ -77,6 +78,8 @@ const Icon: React.FC<Props> = ({ height, width, badge, icon, disabled, ...props 
       {icon}
     </IconWrapper>
   );
-};
+});
+
+Icon.displayName = 'Icon';
 
 export default Icon;

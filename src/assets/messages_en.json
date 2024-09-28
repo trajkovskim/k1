@@ -7,6 +7,7 @@
   "templateapp.email": "kostadinka_trajkovska@yahoo.com",
   "templateapp.modal.alreadymember.title": "Already a member?",
   "templateapp.modal.alreadymember.visitButton": "Visit myherbalife.com",
+  "templateapp.header.searchInput.placeholder": "Search",
   "templateapp.nav.home": "Home",
   "templateapp.nav.shop": "Shop",
   "templateapp.nav.projects": "Projects",
@@ -57,6 +58,8 @@
   "templateapp.contact.giveUsAMessage.messageInput.placeholder": "Message",
   "templateapp.contact.giveUsAMessage.sendMessageButton": "Send",
   "templateapp.viewDetails.overview": "Overview",
+  "templateapp.viewDetails.addToCartButton": "Add to cart",
+  "templateapp.viewDetailsotherProducts.title": "Other products",
   "templateapp.followUs": "Follow us",
   "templateapp.footer.description": "Description",
   "templateapp.footer.usefulLinks.title": "Useful links",
@@ -71,7 +74,5 @@
   "templateapp.VITAMIN": "Vitamins",
   "templateapp.PROTEIN_BARS": "Protein bars",
   "templateapp.SPORT": "Sport",
-  "templateapp.PROGRAM": "Program",
-  "templateapp.viewDetails.formula1Form.flavor.label": "Flavor",
-  "templateapp.viewDetails.formula1Form.flavor.CHOCOLATE": "Chocolate"
+  "templateapp.PROGRAM": "Program"
 }

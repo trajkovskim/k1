@@ -6,19 +6,19 @@ import {
   Container,
   Counter,
   Divider,
-  Dropdown,
   FormItem,
   Image,
+  Select,
   Text,
   Title,
 } from 'components/common';
 import { WhiteBackgroundContainer } from 'components/layout';
 import { useLanguage, useTranslation } from 'hooks';
-import { PAGE_MAX_WIDTH } from 'pages/constants';
+import { PAGE_LEFT_PADDING, PAGE_MAX_WIDTH, PAGE_RIGHT_PADDING } from 'pages/constants';
 import { AddToCartForm } from 'pages/view-details/types';
 import { findProductCombination, getPrice } from 'pages/view-details/utils';
-import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { createViewDetailsRoute } from 'routes';
 import { getProduct, searchProducts } from 'services';
 import styled from 'styled-components';
@@ -36,16 +36,19 @@ const ViewDetails: React.FC = () => {
   const { id } = useParams();
   const { language } = useLanguage();
   const product = getProduct(Number(id), language);
-  const otherProducts = searchProducts({ pageSize: 4 });
+  const otherProducts = searchProducts({ pageSize: 4, acceptLanguage: language });
   const t = useTranslation('viewDetails');
-  const navigate = useNavigate();
 
   const [form] = Form.useForm<AddToCartForm>();
-  const [formValues, setFormValues] = useState<AddToCartForm>();
+  const [formValues, setFormValues] = useState<AddToCartForm>({});
 
   if (!product) {
     throw new Error('Product not found');
   }
+
+  useEffect(() => {
+    form.resetFields();
+  }, [form, id]);
 
   const handleFormChange = (_: unknown, values: AddToCartForm) => {
     setFormValues(values);
@@ -65,8 +68,11 @@ const ViewDetails: React.FC = () => {
   return (
     <Container
       xs={PAGE_MAX_WIDTH}
-      styleConfig={{ centered: true, padding: { bottom: 'xl' } }}
-      mdStyle={{ padding: { top: '2xl', bottom: '2xl', left: 'md', right: 'md' } }}
+      styleConfig={{ centered: true, padding: { bottom: 'xl' }, gap: '1rem' }}
+      mdStyle={{
+        padding: { top: 'xl', bottom: 'xl', left: PAGE_LEFT_PADDING, right: PAGE_RIGHT_PADDING },
+        gap: '3rem',
+      }}
     >
       <Container styleConfig={{ direction: 'row', wrap: true, gap: '3rem', alignItems: 'start' }}>
         <WhiteBackgroundContainer xs={12} md={6} xl={5}>
@@ -86,7 +92,7 @@ const ViewDetails: React.FC = () => {
               {product?.attributes?.map((attribute) => (
                 <Container key={attribute.key} xs={12}>
                   <FormItem name={['attributes', attribute.id.toString()]}>
-                    <Dropdown
+                    <Select
                       placeholder={attribute.name}
                       label={attribute.name}
                       options={attribute.values.map((value) => ({ value: value.id, label: value.text }))}
@@ -97,13 +103,13 @@ const ViewDetails: React.FC = () => {
                 </Container>
               ))}
               <Container xs={12} sm={3.5}>
-                <FormItem name="quantity" initialValue={0}>
-                  <Counter size="xl" />
+                <FormItem name="quantity" initialValue={1}>
+                  <Counter size="xl" min={1} max={10} />
                 </FormItem>
               </Container>
               <Container xs={12} sm={8.5}>
                 <Button htmlType="submit" type="primary" size="xl">
-                  Add to cart
+                  {t('addToCartButton')}
                 </Button>
               </Container>
             </Container>
@@ -114,8 +120,10 @@ const ViewDetails: React.FC = () => {
         </Container>
       </Container>
       <Divider />
-      <Container styleConfig={{ padding: { left: 'md', right: 'md' }, gap: '10px' }}>
-        <Text size="xl">Other products</Text>
+      <Container styleConfig={{ gap: '15px', padding: { left: PAGE_LEFT_PADDING, right: PAGE_RIGHT_PADDING } }}>
+        <Text size="2xl" strong>
+          {t('otherProducts.title')}
+        </Text>
         <Container styleConfig={{ wrap: true, direction: 'row', gap: '10px' }}>
           {otherProducts.map((product) => (
             <Container key={product.id} xs={12} sm={6} lg={3}>
@@ -124,9 +132,10 @@ const ViewDetails: React.FC = () => {
                 id={product.id}
                 title={product.title}
                 amount={getPrice(product)}
-                onView={() => navigate(createViewDetailsRoute(product.id.toString()))}
+                href={createViewDetailsRoute(product.id.toString())}
                 images={[product.image]}
-                imageHeight="200px"
+                imageHeight="270px"
+                imageWidth="100%"
               />
             </Container>
           ))}

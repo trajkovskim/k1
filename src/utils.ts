@@ -2,26 +2,54 @@ import { TranslationFunction } from 'hooks';
 import { css } from 'styled-components';
 import theme, { Breakpoints, LARGEST_BREAKPOINT } from 'theme';
 
+export const createQueryParametersObject = <K extends string>(search: string | undefined) => {
+  if (!search) {
+    return {} as Record<K, string>;
+  }
+
+  return Object.fromEntries(
+    (search.startsWith('?') ? search.substring(1) : search).split('&').map((parameter) => parameter.split('='))
+  ) as Record<K, string>;
+};
+
+export const createQueryParameters = (...allParametersObjects: Record<string, unknown>[]) => {
+  const parameters = allParametersObjects.flatMap((parameters) =>
+    Object.entries(parameters)
+      .filter(([, value]) => value !== undefined)
+      .map(([key, value]) => [key, Array.isArray(value) ? value.join(',') : String(value)])
+  );
+
+  const parametersByKey: Record<string, string[]> = {};
+
+  for (const [key, value] of parameters) {
+    if (!(key in parametersByKey)) {
+      parametersByKey[key] = [];
+    }
+
+    parametersByKey[key] = [...parametersByKey[key], value];
+  }
+
+  return Object.entries(parametersByKey)
+    .map(([key, value]) => `${key}=${value.join(',')}`)
+    .join('&');
+};
+
 export const goto = (url: string) => {
   window.location.replace(url);
 };
 
-export const call = (tel: string) => {
-  window.open(`tel:+${tel.replaceAll(/[^0-9]/g, '')}`);
+export const createTelLink = (tel: string) => {
+  return `tel:+${tel.replaceAll(/[^0-9]/g, '')}`;
 };
 
-export const mailTo = (emailTo: string, otherParameters?: Record<string, string>) => {
+export const createMailToLink = (emailTo: string, otherParameters?: Record<string, string>) => {
   if (!otherParameters) {
-    window.open(`mailto:${emailTo}`, '_self');
-    return;
+    return `mailto:${emailTo}`;
   }
 
-  window.open(
-    `mailto:${emailTo}?${Object.entries(otherParameters)
-      .map((entry) => entry.join('='))
-      .join('&')}`,
-    '_self'
-  );
+  return `mailto:${emailTo}?${Object.entries(otherParameters)
+    .map((entry) => entry.join('='))
+    .join('&')}`;
 };
 
 export const formatNumber = (num: string | number, separator = ',') => {

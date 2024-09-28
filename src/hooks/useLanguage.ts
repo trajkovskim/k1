@@ -1,4 +1,4 @@
-import type { Language } from 'context/base';
+import { Language } from 'context/base';
 import { setLanguageAction } from 'context/base/action';
 import useApplicationContext from 'hooks/useApplicationContext';
 import { useCallback } from 'react';
@@ -15,7 +15,7 @@ const useLanguage = () => {
 
   const language = state.base?.language;
 
-  return { changeLanguage, language };
+  return { changeLanguage, language, languages: Object.values(Language) };
 };
 
 export default useLanguage;

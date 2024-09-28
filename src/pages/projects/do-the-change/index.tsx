@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { Container, Text, Title } from 'components/common';
-import { PAGE_MAX_WIDTH } from 'pages/constants';
+import { PAGE_LEFT_PADDING, PAGE_MAX_WIDTH, PAGE_RIGHT_PADDING } from 'pages/constants';
 import { createList } from 'pages/projects/common';
 import ProjectsSidebar from 'pages/projects/ProjectsSidebar';
 import React from 'react';
@@ -14,7 +14,7 @@ export const DoTheChange: React.FC = () => {
         direction: 'row',
         wrap: true,
         centered: true,
-        padding: { left: 'md', right: 'md', top: 'xl', bottom: 'xl' },
+        padding: { left: PAGE_LEFT_PADDING, right: PAGE_RIGHT_PADDING, top: 'xl', bottom: 'xl' },
       }}
     >
       <Container xs={12} lg={9} styleConfig={{ gap: '15px' }}>

@@ -3,6 +3,7 @@ import { SIZE_MAP } from 'components/common/form/constants';
 import { ControlSize } from 'components/common/form/types';
 import { createPropeties } from 'components/utils';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 type StyledButtonProps = {
@@ -25,8 +26,14 @@ const StyledButton = styled(AntdButton)<StyledButtonProps>`
 
 type Props = Omit<AntdButtonProps, 'size'> & { size?: ControlSize };
 
-const Button: React.FC<Props> = ({ size, ...props }) => {
-  return <StyledButton size={size && SIZE_MAP[size]} newSize={size} {...props} />;
+const Button: React.FC<Props> = ({ size, href, ...props }) => {
+  const button = <StyledButton size={size && SIZE_MAP[size]} newSize={size} {...props} />;
+
+  if (href) {
+    return <Link to={href}>{button}</Link>;
+  }
+
+  return button;
 };
 
 export default Button;

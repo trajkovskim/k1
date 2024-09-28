@@ -4,14 +4,12 @@ import FitMarathonLogo from 'assets/fit-marathon-logo.png';
 import { Button, Carousel, Container, Image, Title } from 'components/common';
 import { ColoredContainer } from 'components/layout';
 import { useTranslation } from 'hooks';
-import { PAGE_MAX_WIDTH } from 'pages/constants';
+import { PAGE_LEFT_PADDING, PAGE_MAX_WIDTH, PAGE_RIGHT_PADDING } from 'pages/constants';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Routes } from 'routes';
 
 const Section3: React.FC = () => {
   const t = useTranslation('home');
-  const navigate = useNavigate();
   const [projectsSlide, setProjectsSlide] = useState(0);
 
   const createImageContentContainer = (imageSrc: string, content: React.ReactNode) => (
@@ -19,7 +17,7 @@ const Section3: React.FC = () => {
       styleConfig={{
         wrap: true,
         direction: 'row',
-        padding: 'lg',
+        padding: { top: 'xl', bottom: 'xl', left: 'lg', right: 'lg' },
         alignItems: 'center',
         textAlign: 'center',
         userSelect: 'none',
@@ -48,7 +46,7 @@ const Section3: React.FC = () => {
       <Container
         xs={PAGE_MAX_WIDTH}
         styleConfig={{ centered: true }}
-        mdStyle={{ padding: { bottom: 'xl', top: 'xl', right: 'md', left: 'md' } }}
+        mdStyle={{ padding: { bottom: '2xl', top: '2xl', left: PAGE_LEFT_PADDING, right: PAGE_RIGHT_PADDING } }}
       >
         <Carousel flexChildren dots arrows draggable beforeChange={(_, next) => setProjectsSlide(next)}>
           {createImageContentContainer(
@@ -59,14 +57,7 @@ const Section3: React.FC = () => {
                 size="lg"
                 title={t('section3.item.0.title')}
                 description={t('section3.item.0.description')}
-                afterTitle={
-                  <Button
-                    icon={<RightCircleOutlined />}
-                    type="link"
-                    size="lg"
-                    onClick={() => navigate(Routes.FIT_MARATHON)}
-                  />
-                }
+                afterTitle={<Button icon={<RightCircleOutlined />} type="link" size="lg" href={Routes.FIT_MARATHON} />}
               />
             </>
           )}
@@ -78,14 +69,7 @@ const Section3: React.FC = () => {
                 size="lg"
                 title={t('section3.item.1.title')}
                 description={t('section3.item.1.description')}
-                afterTitle={
-                  <Button
-                    icon={<RightCircleOutlined />}
-                    type="link"
-                    size="lg"
-                    onClick={() => navigate(Routes.DO_THE_CHANGE)}
-                  />
-                }
+                afterTitle={<Button icon={<RightCircleOutlined />} type="link" size="lg" href={Routes.DO_THE_CHANGE} />}
               />
             </>
           )}

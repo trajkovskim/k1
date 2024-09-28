@@ -1,4 +1,4 @@
-import { Dropdown } from 'components/common/form';
+import { Select } from 'components/common';
 import { useTranslation } from 'hooks';
 import { convertSortByToOptions } from 'pages/shop/utils';
 import React from 'react';
@@ -15,7 +15,7 @@ const SortAndSizeDropdowns: React.FC<Props> = (props) => {
 
   return (
     <>
-      <Dropdown
+      <Select
         noBorder
         variant="borderless"
         size="md"

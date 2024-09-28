@@ -3,7 +3,7 @@ import Container from 'components/common/Container';
 import { Button } from 'components/common/form';
 import { useTranslation } from 'hooks';
 import React from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { Routes } from 'routes';
 
 type Props = {
@@ -13,7 +13,6 @@ type Props = {
 const Breadcrumb: React.FC<Props> = (props) => {
   const t = useTranslation('breadcrumb');
   const location = useLocation();
-  const navigate = useNavigate();
   const { id } = useParams();
 
   const paths: {
@@ -42,31 +41,17 @@ const Breadcrumb: React.FC<Props> = (props) => {
 
   return (
     <Container styleConfig={{ direction: 'row', gap: '0.3rem' }}>
-      {paths.map((path, index) => (
-        <>
-          {index !== paths.length - 1 ? (
-            <Button
-              key={path.pathname}
-              type="link"
-              size="md"
-              icon={path.icon}
-              onClick={() => navigate({ pathname: path.pathname })}
-            >
-              {path.label}
-            </Button>
-          ) : (
-            <Button disabled type="link" size="md">
-              {path.label}
-            </Button>
-          )}
-
-          {index !== paths.length - 1 && (
-            <Button disabled type="link" size="md">
-              {'>'}
-            </Button>
-          )}
-        </>
-      ))}
+      {paths.map((path, index) =>
+        index !== paths.length - 1 ? (
+          <Button key={path.pathname} type="link" size="md" icon={path.icon} href={path.pathname}>
+            {path.label} {'>'}
+          </Button>
+        ) : (
+          <Button key={path.pathname} disabled type="link" size="md">
+            {path.label}
+          </Button>
+        )
+      )}
     </Container>
   );
 };

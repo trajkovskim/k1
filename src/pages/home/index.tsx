@@ -17,7 +17,7 @@ const Home: React.FC = () => {
 
   /* Carousel */
   return (
-    <Container styleConfig={{ gap: '4rem' }} lgStyle={{ gap: '9rem' }}>
+    <Container styleConfig={{ gap: '4rem' }} lgStyle={{ gap: '5rem' }} xlStyle={{ gap: '9rem' }}>
       <Container>
         <Carousel arrows draggable flexChildren>
           <ImageContainer imageSrc={HerbalifeShakes} styleConfig={{ minHeight: '500px' }}>
@@ -30,8 +30,7 @@ const Home: React.FC = () => {
                 textAlign: 'center',
                 alignItems: 'center',
               }}
-              lgStyle={{
-                padding: { left: 'md', right: 'md' },
+              mdStyle={{
                 textAlign: 'start',
                 alignItems: 'start',
               }}
@@ -58,7 +57,6 @@ const Home: React.FC = () => {
                 alignItems: 'center',
               }}
               lgStyle={{
-                padding: { left: 'md', right: 'md' },
                 textAlign: 'start',
                 alignItems: 'start',
               }}

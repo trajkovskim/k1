@@ -7,7 +7,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Routes } from 'routes';
 import styled from 'styled-components';
-import { goto } from 'utils';
 
 const SocialMedias = styled(Container)`
   > svg {
@@ -47,7 +46,7 @@ const Footer: React.FC = () => {
                 icon={socialMedia.icon}
                 type="link"
                 size="lg"
-                onClick={() => goto(socialMedia.href)}
+                href={socialMedia.href}
               />
             ))}
           </SocialMedias>

@@ -52,7 +52,7 @@ export const findProductCombination = (product: ProductDetailed, formData: AddTo
   }
 
   for (const attr of availableCombinations[0].attributes) {
-    if (formData.attributes[attr.attrId.toString()].toString() !== attr.attrValueId.toString()) {
+    if (formData.attributes?.[attr.attrId.toString()].toString() !== attr.attrValueId.toString()) {
       return undefined;
     }
   }

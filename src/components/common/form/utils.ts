@@ -25,12 +25,12 @@ export const parseInputValue = (input: HTMLInputElement) => {
 };
 
 export const getCalcPaddingTopCss = (theme: any, size: ControlSize) =>
-  `calc(${getCalcInputLabelCss(theme, size)} + 5px)`;
+  `calc(${getCalcInputLabelCss(theme, size)} + 10px)`;
 
 export const getCalcInputLabelCss = (theme: any, size: ControlSize) =>
   `calc(${theme.fontSize[size]} - ${theme.fontSize[size]} / 4.5)`;
 
 export const getCalcInputHeightCss = (theme: any, size: ControlSize, includeLabelSize = false) =>
   includeLabelSize
-    ? `calc(${theme.controlHeight[size]} + ${getCalcInputLabelCss(theme, size)} + 5px)`
+    ? `calc(${theme.controlHeight[size]} + ${getCalcInputLabelCss(theme, size)} + 10px)`
     : theme.controlHeight[size];

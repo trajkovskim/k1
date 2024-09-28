@@ -59,6 +59,7 @@ export const StyledFormFieldContainer = styled.div<StyledFormFieldContainerProps
   ${(props) =>
     props.label &&
     css`
+      textarea,
       input:not(.ant-select-selection-search-input),
       .ant-select-arrow,
       .ant-select-selection-item,

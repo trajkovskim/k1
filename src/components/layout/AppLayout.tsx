@@ -17,6 +17,13 @@ const StyledLayout = styled(Layout)`
   }
 `;
 
+const StyledModal = styled(Modal)`
+  .ant-modal-close {
+    top: 10px;
+    right: 10px;
+  }
+`;
+
 const AppLayout: React.FC = () => {
   const t = useTranslation();
   const [initialModal, setInitialModal] = useState<boolean>(false);
@@ -40,7 +47,7 @@ const AppLayout: React.FC = () => {
       </main>
       <Footer />
       <BackToTopButton />
-      <Modal
+      <StyledModal
         open={initialModal}
         onCancel={() => setInitialModal(false)}
         cancelButtonProps={{ style: { display: 'none' } }}
@@ -52,7 +59,7 @@ const AppLayout: React.FC = () => {
             {t('modal.alreadymember.visitButton')}
           </Button>
         </Container>
-      </Modal>
+      </StyledModal>
     </StyledLayout>
   );
 };

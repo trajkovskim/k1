@@ -1,4 +1,4 @@
-import { Select, SelectProps } from 'antd';
+import { Select as AntdSelect, SelectProps } from 'antd';
 import { SIZE_MAP } from 'components/common/form/constants';
 import {
   StyledContainer,
@@ -10,11 +10,11 @@ import type { FormFieldProps } from 'components/common/form/types';
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 
-const StyledSelect = styled(Select)<StyledInputWithRightContainerProps>``;
+const StyledSelect = styled(AntdSelect)<StyledInputWithRightContainerProps>``;
 
 type Props = FormFieldProps<SelectProps>;
 
-const Dropdown: React.FC<Props> = ({
+const Select: React.FC<Props> = ({
   state,
   fullwidth,
   rightContainer,
@@ -52,4 +52,4 @@ const Dropdown: React.FC<Props> = ({
   );
 };
 
-export default Dropdown;
+export default Select;

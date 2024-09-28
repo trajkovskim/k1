@@ -2,7 +2,7 @@ import { Avatar } from 'antd';
 import NoImageAvailable from 'assets/noimageavailable.jpg';
 import { CardMeta, Container, Text, Title } from 'components/common';
 import { useTranslation } from 'hooks';
-import { PAGE_MAX_WIDTH } from 'pages/constants';
+import { PAGE_LEFT_PADDING, PAGE_MAX_WIDTH, PAGE_RIGHT_PADDING } from 'pages/constants';
 import React from 'react';
 
 const Section4: React.FC = () => {
@@ -16,7 +16,12 @@ const Section4: React.FC = () => {
         direction: 'row',
         gap: '2rem',
         centered: true,
-        padding: 'md',
+        padding: {
+          top: 'md',
+          bottom: 'md',
+          left: PAGE_LEFT_PADDING,
+          right: PAGE_RIGHT_PADDING,
+        },
       }}
     >
       <Container xs={12} md={6}>

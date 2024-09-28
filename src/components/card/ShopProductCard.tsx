@@ -4,10 +4,12 @@ import { ProductProps } from 'components/card/types';
 import { Card, Text } from 'components/common';
 import ImageLazyLoaded from 'components/ImageLazyLoaded';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ShopProductCard: React.FC<ProductProps> = (props) => {
-  return (
+  const card = (
     <Card
+      style={{ height: '100%' }}
       className={props.className}
       hoverable
       body={<ProductTitle title={props.title} summary={props.summary} onView={props.onView} />}
@@ -31,6 +33,20 @@ const ShopProductCard: React.FC<ProductProps> = (props) => {
       onClick={props.onView}
     />
   );
+
+  if (props.href) {
+    return (
+      <Link
+        style={{ display: 'block', height: '100%', userSelect: 'none' }}
+        draggable={props.noDraggable ? 'false' : 'true'}
+        to={props.href}
+      >
+        {card}
+      </Link>
+    );
+  }
+
+  return card;
 };
 
 export default ShopProductCard;
