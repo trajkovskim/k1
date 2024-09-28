@@ -70,11 +70,11 @@ const Shop: React.FC = () => {
   const queryParameters = createQueryParametersObject<QueryParameters>(searchParams.toString());
 
   const filters: ProductFilters = {
-    types: (queryParameters.types?.split(',') as typeof filters.types) ?? INITIAL_PRODUCT_FILTERS.types,
+    types: (queryParameters.types?.split(',') as ProductFilters['types']) ?? INITIAL_PRODUCT_FILTERS.types,
     featured: (queryParameters.featured === 'true' || undefined) ?? INITIAL_PRODUCT_FILTERS.featured,
   };
 
-  const sortBy: SortBy = (queryParameters.sortBy as typeof sortBy) ?? SortBy.UNSORTED;
+  const sortBy: SortBy = (queryParameters.sortBy as SortBy) ?? SortBy.UNSORTED;
 
   const updateLocation = (filters: ProductFilters, sortBy: SortBy) => {
     navigate({
